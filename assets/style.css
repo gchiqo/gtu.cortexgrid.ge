@@ -1,0 +1,293 @@
+:root {
+    --bg: #0f1115;
+    --panel: #181b22;
+    --panel-2: #20242c;
+    --text: #e7e9ee;
+    --muted: #8a91a0;
+    --accent: #6ea8ff;
+    --accent-2: #2a3a5a;
+    --border: #2a2f39;
+    --free: #1c2027;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    line-height: 1.4;
+    min-height: 100vh;
+}
+header, main, footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px 20px;
+}
+header h1 { margin: 0 0 4px; font-size: 22px; }
+.muted { color: var(--muted); font-size: 13px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.search input {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 16px;
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+}
+.search input:focus { border-color: var(--accent); }
+
+.results {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    display: none;
+}
+.results.show { display: block; }
+.results li {
+    padding: 10px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+.results li:last-child { border-bottom: 0; }
+.results li:hover, .results li.active { background: var(--panel-2); }
+.results .count { color: var(--muted); font-size: 12px; }
+.results .source-badge {
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    margin-right: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+.results .source-pdf      { color: var(--accent); border-color: var(--accent); }
+.results .type-subject    { color: #ffb86c; border-color: #ffb86c; }
+.results .right { display: flex; gap: 6px; align-items: center; }
+.results .faculties { color: var(--muted); font-size: 11px; margin-left: 6px; }
+
+#teacherView { margin-top: 24px; }
+#teacherView.hidden { display: none; }
+#teacherName { margin: 0 0 4px; font-size: 20px; }
+
+.source-group { margin-top: 18px; padding-top: 12px; border-top: 1px dashed var(--border); }
+.source-group:first-of-type { border-top: 0; padding-top: 0; }
+.source-heading { margin: 0 0 4px; font-size: 14px; font-weight: 600; color: var(--accent); }
+.source-sub { margin: 0 0 8px; font-size: 12px; }
+
+.faculty-kind-heading {
+    grid-column: 1 / -1;
+    background: transparent !important;
+    border: 0 !important;
+    color: var(--accent) !important;
+    cursor: default !important;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 4px 4px !important;
+}
+.faculty-kind-heading:hover { background: transparent !important; }
+
+.schedule-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 2px;
+    margin-top: 12px;
+    table-layout: fixed;
+}
+.schedule-table th, .schedule-table td {
+    padding: 6px 8px;
+    background: var(--panel);
+    border-radius: 4px;
+    vertical-align: top;
+    font-size: 12px;
+}
+.schedule-table thead th {
+    background: var(--panel-2);
+    color: var(--muted);
+    font-weight: 600;
+    text-align: center;
+}
+.schedule-table .slot-label {
+    width: 70px;
+    text-align: right;
+    color: var(--muted);
+    background: transparent;
+    font-variant-numeric: tabular-nums;
+}
+.schedule-table td.lesson {
+    background: var(--accent-2);
+    border-left: 3px solid var(--accent);
+}
+.schedule-table td.free {
+    background: var(--free);
+}
+.lesson .subject { font-weight: 600; color: var(--text); }
+.lesson .meta { color: var(--muted); margin-top: 2px; font-size: 11px; }
+.lesson .room { color: var(--accent); font-weight: 500; margin-top: 2px; }
+
+.group-section {
+    margin-top: 32px;
+    padding: 16px 18px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid #ffb86c;
+    border-radius: 8px;
+}
+.group-section h2 { margin: 0 0 4px; font-size: 18px; }
+.group-section .muted code {
+    background: var(--panel-2);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+.group-section input[type="search"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 8px;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    font: inherit;
+}
+.group-section input[type="search"]:focus { border-color: #ffb86c; }
+#groupView { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); }
+#groupView.hidden { display: none; }
+#groupName { margin: 0 0 4px; font-size: 18px; color: #ffb86c; }
+#groupMeta { font-size: 13px; }
+
+#facultiesSection { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+#facultiesSection h2 { margin: 0 0 6px; font-size: 18px; }
+
+.faculty-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 8px;
+}
+.faculty-list li {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    cursor: pointer;
+}
+.faculty-list li:hover { background: var(--panel-2); border-color: var(--accent); }
+.faculty-list .name { font-weight: 600; }
+.faculty-list .meta { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+#facultyView { margin-top: 16px; }
+#facultyView.hidden { display: none; }
+.faculty-header { margin-bottom: 8px; }
+#facultyName { margin: 0 0 4px; font-size: 16px; }
+#facultyFilter {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    outline: none;
+}
+#facultyFilter:focus { border-color: var(--accent); }
+.faculty-text {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    max-height: 60vh;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.faculty-text mark, .structured-table mark {
+    background: var(--accent);
+    color: #0f1115;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+.faculty-tabs { display: flex; gap: 4px; margin-bottom: 8px; }
+.tab {
+    background: var(--panel);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    font: inherit;
+}
+.tab:hover { color: var(--text); }
+.tab.active { background: var(--accent-2); color: var(--text); border-color: var(--accent); }
+
+.hidden { display: none; }
+
+.structured-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.structured-table thead th {
+    background: var(--panel-2);
+    color: var(--muted);
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+    position: sticky; top: 0;
+}
+.structured-table tbody td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+.structured-table tbody tr:last-child td { border-bottom: 0; }
+.structured-table tbody tr:hover { background: var(--panel-2); }
+.structured-table .col-teacher { font-weight: 600; white-space: nowrap; }
+.structured-table .col-times,
+.structured-table .col-room { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--accent); }
+.structured-table .col-day { color: var(--muted); white-space: nowrap; }
+.structured-table .col-quality { color: var(--muted); font-size: 11px; text-align: right; }
+.structured-table .row-low-quality td { opacity: 0.55; }
+
+.chips { display: inline-flex; flex-wrap: wrap; gap: 4px; vertical-align: middle; }
+.chip {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 1px 8px;
+    font-size: 11px;
+}
+
+footer { padding-top: 32px; padding-bottom: 32px; }
+
+@media (max-width: 720px) {
+    .schedule-table th, .schedule-table td { font-size: 11px; padding: 4px 5px; }
+    .schedule-table .slot-label { width: 56px; }
+    header h1 { font-size: 18px; }
+}

@@ -1,0 +1,8 @@
+{
+    "name": "gtu/schedule",
+    "description": "GTU schedule aggregator",
+    "type": "project",
+    "require": {
+        "smalot/pdfparser": "^2.10"
+    }
+}
