@@ -752,6 +752,14 @@ groupQEl.addEventListener('focus', () => {
     }
 });
 
+// If the page is opened with ?group=XXX (e.g. from the Chrome extension's
+// "ჩემი ცხრილი" button), auto-load that group's schedule.
+const groupParam = new URLSearchParams(location.search).get('group');
+if (groupParam) {
+    groupQEl.value = groupParam;
+    loadGroup(groupParam);
+}
+
 // ---------- Faculties / additional courses ----------
 
 const facultyListEl = $('#facultyList');
