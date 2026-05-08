@@ -60,6 +60,115 @@ function name_like_patterns_loose(?string $value): array {
  * match AND a teacher match — otherwise unrelated subjects taught by the same
  * teacher would leak in.
  */
+/**
+ * Pull the meaningful words out of a subject title.
+ *
+ * Parenthesised course codes ("(ICT25408E1-LP)") get stripped because they
+ * vary between vici and leqtori for the same subject. Sub-4-character words
+ * are dropped (Georgian "და" / English "of" etc.) — they create too much
+ * noise. Returns lowercased, deduplicated.
+ */
+function significant_words(string $s): array {
+    $s = preg_replace('/\([^)]*\)/u', ' ', $s) ?? $s;
+    $tokens = preg_split('/[\s,.\\\\\/\-—–:;]+/u', mb_strtolower($s, 'UTF-8')) ?: [];
+    $out = [];
+    foreach ($tokens as $w) {
+        if ($w !== '' && mb_strlen($w, 'UTF-8') >= 4) $out[] = $w;
+    }
+    return array_values(array_unique($out));
+}
+
+/**
+ * Looser-than-strict subject match: returns true if a row subject shares
+ * enough significant words with any of the card's subject candidates that
+ * we're confident it's the same course despite small wording differences
+ * (e.g. "სისტემა Hadoop" in the card vs "ეკოსისტემა Hadoop" in leqtori).
+ *
+ * Uses substring tests rather than equality so a row's "ეკოსისტემა"
+ * still satisfies the card's "სისტემა" (it embeds it). The threshold
+ * combination — ≥3 matches AND ≥50% of card words — was chosen so:
+ *   - Bichnigauri's true Hadoop row scores 5/6 → matches
+ *   - Lili's "Fundamentals of Database Systems" scores 1/5 (just "data")
+ *     → does NOT match
+ *   - Bichnigauri's other course "Big Data Fundamentals" scores 1/5 → does
+ *     NOT match (we don't pull her unrelated lectures into this course)
+ */
+function subject_overlaps_enough(string $rowSubject, array $cardSubjectCandidates): bool {
+    $rowLower = mb_strtolower($rowSubject, 'UTF-8');
+    foreach ($cardSubjectCandidates as $cs) {
+        $cardWords = significant_words($cs);
+        $n = count($cardWords);
+        if ($n < 3) continue; // single-word subjects can't be fuzzy-matched safely
+        $matched = 0;
+        foreach ($cardWords as $w) {
+            if (mb_stripos($rowLower, $w) !== false) $matched++;
+        }
+        if ($matched >= 3 && ($matched / $n) >= 0.5) return true;
+    }
+    return false;
+}
+
+/** Same SQL shape as lecture_query() but with subject filter dropped — we
+ *  post-filter in PHP using subject_overlaps_enough() instead. Used as a
+ *  fallback when both strict-subject passes return nothing. */
+function fuzzy_lecture_query(PDO $pdo, array $subjectCandidates, array $teacherCandidates): array {
+    $tchPats = merge_patterns($teacherCandidates, true);
+    if (!$tchPats || !$subjectCandidates) return [];
+
+    $tchOrs = implode(' OR ', array_fill(0, count($tchPats), 'COALESCE(t.searchable, LOWER(t.name)) LIKE ?'));
+    $sql = "SELECT
+                l.weekday, l.start_slot, l.end_slot, l.start_time, l.end_time,
+                l.lesson_type, l.room, l.group_code,
+                t.name AS teacher_name,
+                s.name AS subject_name, s.code AS subject_code,
+                src.url           AS source_url,
+                src.section_title AS source_section,
+                src.display_label AS source_label,
+                src.fetched_at    AS source_fetched_at
+            FROM lecture l
+            JOIN teacher t ON t.id = l.teacher_id
+            JOIN subject s ON s.id = l.subject_id
+            JOIN source  src ON src.id = l.source_id
+            WHERE ($tchOrs)
+            ORDER BY src.id, l.weekday, l.start_slot";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($tchPats);
+    $rows = $stmt->fetchAll();
+    return array_values(array_filter($rows,
+        fn($r) => subject_overlaps_enough((string)$r['subject_name'], $subjectCandidates)
+    ));
+}
+
+function fuzzy_additional_query(PDO $pdo, array $subjectCandidates, array $teacherCandidates): array {
+    $tchPats = merge_patterns($teacherCandidates, true);
+    if (!$tchPats || !$subjectCandidates) return [];
+
+    $tchOrs = implode(' OR ', array_fill(0, count($tchPats), 'al.teacher_searchable LIKE ?'));
+    $sql = "SELECT
+                al.weekday, al.day_label, al.times_csv, al.rooms_csv,
+                al.lesson_type, al.parse_quality,
+                al.teacher_name, al.subject_name, al.faculty_slug,
+                p.faculty_name, p.kind AS pdf_kind,
+                src.url           AS source_url,
+                src.section_title AS source_section,
+                src.display_label AS source_label,
+                src.fetched_at    AS source_fetched_at
+            FROM additional_lecture al
+            JOIN pdf_doc p   ON p.id   = al.pdf_doc_id
+            JOIN source  src ON src.id = p.source_id
+            WHERE ($tchOrs)
+            ORDER BY al.weekday IS NULL, al.weekday, al.times_csv";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($tchPats);
+    $rows = $stmt->fetchAll();
+    // Caller (match_additional_for_course) does the times_csv/rooms_csv split.
+    return array_values(array_filter($rows,
+        fn($r) => subject_overlaps_enough((string)$r['subject_name'], $subjectCandidates)
+    ));
+}
+
 function match_lectures_for_course(PDO $pdo, array $subjectCandidates, array $teacherCandidates): array {
     // Subject must be a FULL-phrase match — never per-word loose. A subject
     // like "Big Data storage and processing system Hadoop" splits into words
@@ -76,6 +185,12 @@ function match_lectures_for_course(PDO $pdo, array $subjectCandidates, array $te
     $rows = lecture_query($pdo, $subj, merge_patterns($teacherCandidates, false));
     if (!$rows) {
         $rows = lecture_query($pdo, $subj, merge_patterns($teacherCandidates, true));
+    }
+    if (!$rows) {
+        // Fuzzy: card and leqtori sometimes use slightly different wording for
+        // the same subject (e.g. "სისტემა Hadoop" vs "ეკოსისტემა Hadoop").
+        // Pull the teacher's rows and post-filter by significant-word overlap.
+        $rows = fuzzy_lecture_query($pdo, $subjectCandidates, $teacherCandidates);
     }
     return $rows;
 }
@@ -127,6 +242,9 @@ function match_additional_for_course(PDO $pdo, array $subjectCandidates, array $
     $rows = additional_query($pdo, $subj, merge_patterns($teacherCandidates, false));
     if (!$rows) {
         $rows = additional_query($pdo, $subj, merge_patterns($teacherCandidates, true));
+    }
+    if (!$rows) {
+        $rows = fuzzy_additional_query($pdo, $subjectCandidates, $teacherCandidates);
     }
     foreach ($rows as &$r) {
         $r['times'] = $r['times_csv'] ? explode(',', $r['times_csv']) : [];
