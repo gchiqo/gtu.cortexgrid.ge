@@ -7,38 +7,46 @@
 </head>
 <body>
 <header>
-    <h1>GTU ცხრილი</h1>
-    <p class="muted" id="status">იტვირთება…</p>
+    <div class="lang-switcher" role="group">
+        <button data-lang="ka" type="button">ქარ</button>
+        <button data-lang="en" type="button">ENG</button>
+    </div>
+    <h1 id="t_title">GTU ცხრილი</h1>
+    <p class="muted" id="status">…</p>
 </header>
 
 <section id="found" class="hidden">
-    <div class="kv"><span class="k">სტუდენტი</span><span class="v" id="name">—</span></div>
-    <div class="kv"><span class="k">ფაკულტეტი</span><span class="v" id="school">—</span></div>
-    <div class="kv"><span class="k">სემესტრი</span><span class="v" id="semester">—</span></div>
-    <div class="kv"><span class="k">წელი</span><span class="v" id="year">—</span></div>
-    <div class="kv"><span class="k">GPA</span><span class="v" id="gpa">—</span></div>
+    <div class="kv"><span class="k" data-k="kv.student">სტუდენტი</span><span class="v" id="name">—</span></div>
+    <div class="kv"><span class="k" data-k="kv.school">ფაკულტეტი</span><span class="v" id="school">—</span></div>
+    <div class="kv"><span class="k" data-k="kv.semester">სემესტრი</span><span class="v" id="semester">—</span></div>
+    <div class="kv"><span class="k" data-k="kv.year">წელი</span><span class="v" id="year">—</span></div>
+    <div class="kv"><span class="k" data-k="kv.gpa">GPA</span><span class="v" id="gpa">—</span></div>
 
-    <h3>ამჟამინდელი საგნები (<span id="courseCount">0</span>)</h3>
+    <h3 id="t_courseHeading">ამჟამინდელი საგნები</h3>
     <ul id="coursesList" class="courses"></ul>
 
+    <p class="muted small" id="t_totals"></p>
+
     <a id="openMe" class="primary-btn" target="_blank" rel="noopener">📅 ნახე სრული ცხრილი</a>
+
+    <p class="muted small cant-find" id="t_cantFind"></p>
 </section>
 
 <section id="empty" class="hidden">
-    <p class="muted">vici.gtu.ge-ზე ჯერ არ ხარ შესული.</p>
-    <a class="primary-btn" href="https://vici.gtu.ge/" target="_blank">გახსენი vici.gtu.ge</a>
+    <p class="muted" id="t_noLogin">vici.gtu.ge-ზე ჯერ არ ხარ შესული.</p>
+    <a class="primary-btn" href="https://vici.gtu.ge/" target="_blank" id="t_openVici">🔓 გახსენი vici.gtu.ge</a>
 </section>
 
 <section id="error" class="hidden">
     <p class="muted error" id="errorMsg"></p>
     <details>
-        <summary>დეტალები (debug)</summary>
+        <summary>debug</summary>
         <pre id="errorBody"></pre>
     </details>
 </section>
 
 <details id="rawDetails" class="raw-details hidden">
-    <summary>raw card JSON (debug)</summary>
+    <summary id="t_rawSummary">raw card JSON (debug)</summary>
     <pre id="rawJson"></pre>
 </details>
 
@@ -46,6 +54,7 @@
     <a href="https://gtu.cortexgrid.ge/" target="_blank" rel="noopener">gtu.cortexgrid.ge</a>
 </footer>
 
+<script src="i18n.js"></script>
 <script src="popup.js"></script>
 </body>
 </html>

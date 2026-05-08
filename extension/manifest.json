@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "GTU ცხრილი — vici-bridge",
-  "short_name": "GTU ცხრილი",
+  "name": "GTU — vici-bridge",
+  "short_name": "GTU",
   "version": "0.1.0",
   "description": "Reads the user's group + courses from vici.gtu.ge and links to gtu.cortexgrid.ge for the full weekly schedule.",
 
@@ -27,7 +27,7 @@
   ],
 
   "action": {
-    "default_title": "GTU ცხრილი",
+    "default_title": "GTU",
     "default_popup": "popup/popup.html",
     "default_icon": {
       "16":  "icons/icon-16.png",

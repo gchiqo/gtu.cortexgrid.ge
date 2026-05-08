@@ -1,6 +1,19 @@
 'use strict';
 
-const DAYS = ['ორშ.', 'სამშ.', 'ოთხშ.', 'ხუთშ.', 'პარ.', 'შაბ.'];
+// Display arrays; recomputed on every render so they pick up the active
+// language. (i18n.js exposes days() and t().)
+function DAYS_ARR()   { return days().slice(1, 7); }     // [Mon..Sat], i.e. 6 entries
+function DAY_LABEL(n) { return days()[n] || '?'; }       // 1..7
+
+// Re-render hook: when the user toggles language, the most recently rendered
+// detail view re-runs itself with the same data so translations refresh.
+let _lastRender = null;
+const setLastRender = (fn) => { _lastRender = fn; };
+document.addEventListener('langchange', () => {
+    if (typeof _lastRender === 'function') {
+        try { _lastRender(); } catch {}
+    }
+});
 const SLOTS = Array.from({length: 12}, (_, i) => ({
     n: i + 1,
     start: `${String(i + 9).padStart(2, '0')}:00`,
@@ -55,7 +68,7 @@ async function runSearch() {
         const data = await r.json();
         renderResults(data.results || []);
     } catch (err) {
-        resultsEl.innerHTML = '<li class="muted">შეცდომა ძიებისას</li>';
+        resultsEl.innerHTML = `<li class="muted">${t('search.error')}</li>`;
         resultsEl.classList.add('show');
     }
 }
@@ -79,10 +92,10 @@ function renderResults(items) {
         const badge = document.createElement('span');
         if (type === 'subject') {
             badge.className = 'source-badge type-subject';
-            badge.textContent = 'საგანი';
+            badge.textContent = t('badge.subject');
         } else {
             badge.className = 'source-badge ' + (t.source === 'pdf' ? 'source-pdf' : 'source-html');
-            badge.textContent = t.source === 'pdf' ? 'დამატ.' : 'ცხრილი';
+            badge.textContent = t.source === 'pdf' ? t('badge.pdf') : t('badge.html');
         }
         left.appendChild(badge);
         const name = document.createElement('span');
@@ -100,7 +113,7 @@ function renderResults(items) {
         }
         const count = document.createElement('span');
         count.className = 'count';
-        count.textContent = `${t.lecture_count} ლექცია`;
+        count.textContent = t('search.lectures.count', {n: t.lecture_count});
         right.appendChild(count);
 
         li.appendChild(left);
@@ -143,7 +156,7 @@ async function loadTeacher(id) {
         renderTeacher(data);
         teacherView.scrollIntoView({behavior: 'smooth', block: 'start'});
     } catch (err) {
-        teacherNameEl.textContent = 'შეცდომა მონაცემების ჩატვირთვისას';
+        teacherNameEl.textContent = t('teacher.error');
     }
 }
 
@@ -162,11 +175,12 @@ async function loadPdfTeacher(name) {
         renderPdfTeacher(data);
         pdfTeacherView.scrollIntoView({behavior: 'smooth', block: 'start'});
     } catch (err) {
-        pdfTeacherNameEl.textContent = 'შეცდომა მონაცემების ჩატვირთვისას';
+        pdfTeacherNameEl.textContent = t('teacher.error');
     }
 }
 
 function renderPdfTeacher(data) {
+    setLastRender(() => renderPdfTeacher(data));
     pdfTeacherNameEl.textContent = data.name;
 
     // Source labels: each lecture row carries source_label; collect unique ones.
@@ -188,7 +202,7 @@ function renderPdfTeacher(data) {
             : escapeHtml(s.label)
     ).join(' · ');
     pdfTeacherMetaEl.innerHTML =
-        `${data.lectures.length} ლექცია · ${facLinks}` +
+        `${t('search.lectures.count', {n: data.lectures.length})} · ${facLinks}` +
         (sourceLinks ? `<br><span class="muted">წყარო: ${sourceLinks}</span>` : '');
 
     pdfTeacherMetaEl.querySelectorAll('.faculty-link').forEach(a => {
@@ -201,7 +215,7 @@ function renderPdfTeacher(data) {
     pdfTeacherTable.innerHTML = '';
     const thead = document.createElement('thead');
     const headRow = document.createElement('tr');
-    for (const h of ['წყარო', 'ფაკულტეტი', 'საგანი', 'ფორმა', 'დღე', 'საათი', 'აუდიტორია']) {
+    for (const h of [t('subject.col.source'), t('pdfteacher.col.faculty'), t('pdfteacher.col.subject'), t('pdfteacher.col.type'), t('pdfteacher.col.day'), t('pdfteacher.col.times'), t('pdfteacher.col.room')]) {
         const th = document.createElement('th');
         th.textContent = h;
         headRow.appendChild(th);
@@ -225,7 +239,7 @@ function renderPdfTeacher(data) {
         tr.appendChild(td('col-faculty', shortFacultyName(l.faculty_slug)));
         tr.appendChild(td('col-subject', l.subject_name || ''));
         tr.appendChild(td('col-type', l.lesson_type || ''));
-        tr.appendChild(td('col-day', l.weekday ? DAY_KA[l.weekday] : (l.day_label || '')));
+        tr.appendChild(td('col-day', l.weekday ? DAY_LABEL(l.weekday) : (l.day_label || '')));
         tr.appendChild(td('col-times', (l.times || []).join(', ')));
         tr.appendChild(td('col-room', (l.rooms || []).join(', ')));
         tbody.appendChild(tr);
@@ -235,9 +249,9 @@ function renderPdfTeacher(data) {
 
 function shortSourceLabel(l) {
     const k = l.pdf_kind || (l.source && l.source === 'pdf' ? 'pdf' : '');
-    if (k === 'additional_pdf') return 'დამატ.';
-    if (k === 'midterm_pdf')    return 'შუალედ.';
-    if (l.source === 'html')    return 'ცხრილი';
+    if (k === 'additional_pdf') return t('badge.pdf');
+    if (k === 'midterm_pdf')    return t('badge.midterm');
+    if (l.source === 'html')    return t('badge.html');
     return '';
 }
 
@@ -265,24 +279,25 @@ async function loadSubject(name) {
         renderSubject(data);
         subjectView.scrollIntoView({behavior: 'smooth', block: 'start'});
     } catch (err) {
-        subjectNameEl.textContent = 'შეცდომა მონაცემების ჩატვირთვისას';
+        subjectNameEl.textContent = t('teacher.error');
     }
 }
 
 function renderSubject(data) {
+    setLastRender(() => renderSubject(data));
     subjectNameEl.textContent = data.name;
 
     const teacherChips = (data.teachers || []).map(t => `<span class="chip">${escapeHtml(t)}</span>`).join('');
     const facLabels = (data.faculties || []).map(shortFacultyName).join(', ');
     subjectMetaEl.innerHTML =
-        `${data.lectures.length} ლექცია · ` +
-        (facLabels ? `ფაკულტეტი: ${facLabels} · ` : '') +
+        `${t('search.lectures.count', {n: data.lectures.length})} · ` +
+        (facLabels ? `${t('pdfteacher.col.faculty')}: ${facLabels} · ` : '') +
         (teacherChips ? `<span class="chips">${teacherChips}</span>` : '');
 
     subjectTable.innerHTML = '';
     const thead = document.createElement('thead');
     const headRow = document.createElement('tr');
-    for (const h of ['წყარო', 'პედაგოგი', 'დღე', 'საათი', 'აუდიტორია', 'ფორმა', 'ფაკულტეტი / განყოფილება']) {
+    for (const h of [t('subject.col.source'), t('subject.col.teacher'), t('subject.col.day'), t('subject.col.times'), t('subject.col.room'), t('subject.col.type'), t('subject.col.faculty')]) {
         const th = document.createElement('th');
         th.textContent = h;
         headRow.appendChild(th);
@@ -304,7 +319,7 @@ function renderSubject(data) {
 
         tr.appendChild(td('col-source', shortSourceLabel(l)));
         tr.appendChild(td('col-teacher', l.teacher_name || ''));
-        tr.appendChild(td('col-day', l.weekday ? DAY_KA[l.weekday] : (l.day_label || '')));
+        tr.appendChild(td('col-day', l.weekday ? DAY_LABEL(l.weekday) : (l.day_label || '')));
         tr.appendChild(td('col-times', (l.times || []).join(', ')));
         tr.appendChild(td('col-room', (l.rooms || []).join(', ')));
         tr.appendChild(td('col-type', l.lesson_type || ''));
@@ -327,6 +342,7 @@ function escapeHtml(s) {
 }
 
 function renderTeacher(data) {
+    setLastRender(() => renderTeacher(data));
     teacherNameEl.textContent = data.teacher.name;
 
     // Group lectures by source so the user sees a separate grid per source
@@ -347,7 +363,7 @@ function renderTeacher(data) {
         groups.get(key).lectures.push(l);
     }
 
-    const meta = [`${data.lectures.length} ლექცია`, `${groups.size} წყარო`];
+    const meta = [t('teacher.summary', {n: data.lectures.length, sources: groups.size})];
     teacherMetaEl.innerHTML = meta.join(' · ');
 
     scheduleEl.replaceChildren();
@@ -367,7 +383,7 @@ function renderTeacher(data) {
             : '';
         const fileName = g.url ? g.url.split('/').pop() : '';
         sub.innerHTML = [
-            `${g.lectures.length} ლექცია`,
+            t('search.lectures.count', {n: g.lectures.length}),
             date ? `განახლდა ${date}` : '',
             g.url ? `<a href="${g.url}" target="_blank" rel="noopener">${fileName}</a>` : '',
         ].filter(Boolean).join(' · ');
@@ -397,7 +413,7 @@ function buildScheduleGrid(lectures) {
     const thead = document.createElement('thead');
     const headRow = document.createElement('tr');
     headRow.appendChild(document.createElement('th'));
-    for (const d of DAYS) {
+    for (const d of DAYS_ARR()) {
         const th = document.createElement('th');
         th.textContent = d;
         headRow.appendChild(th);
@@ -439,7 +455,7 @@ function makeLessonNode(l) {
 
     const subj = document.createElement('div');
     subj.className = 'subject';
-    subj.textContent = l.subject_name || '(უცნობი საგანი)';
+    subj.textContent = l.subject_name || ('(' + t('teacher.unknown').replace(/[()]/g,'') + ')');
     wrap.appendChild(subj);
 
     const meta = document.createElement('div');
@@ -505,7 +521,7 @@ async function runGroupSearch() {
         const data = await r.json();
         renderGroupResults(data.results || []);
     } catch (err) {
-        groupResultsEl.innerHTML = '<li class="muted">შეცდომა ძიებისას</li>';
+        groupResultsEl.innerHTML = `<li class="muted">${t('search.error')}</li>`;
         groupResultsEl.classList.add('show');
     }
 }
@@ -523,7 +539,7 @@ function renderGroupResults(items) {
         left.textContent = g.code;
         const right = document.createElement('span');
         right.className = 'count';
-        right.textContent = `${g.lecture_count} ლექცია`;
+        right.textContent = t('search.lectures.count', {n: g.lecture_count});
         li.appendChild(left);
         li.appendChild(right);
         li.addEventListener('click', () => loadGroup(g.code));
@@ -546,13 +562,14 @@ async function loadGroup(code) {
         renderGroup(data);
         groupViewEl.scrollIntoView({behavior: 'smooth', block: 'start'});
     } catch (err) {
-        groupNameEl.textContent = 'შეცდომა მონაცემების ჩატვირთვისას';
+        groupNameEl.textContent = t('teacher.error');
         groupMetaEl.textContent = '';
     }
 }
 
 function renderGroup(data) {
-    groupNameEl.textContent = `ჯგუფი ${data.code}`;
+    setLastRender(() => renderGroup(data));
+    groupNameEl.textContent = t('group.title', {code: data.code});
 
     // Group lectures by source so a group with rows from both teachers HTMLs
     // gets one grid per source (same UX as the teacher view).
@@ -580,7 +597,7 @@ function renderGroup(data) {
 
     groupMetaEl.innerHTML = '';
     const lineA = document.createElement('div');
-    lineA.textContent = `${data.lectures.length} ლექცია · ${data.teachers.length} პედაგოგი · ${data.subjects.length} საგანი · ${groups.size} წყარო`;
+    lineA.textContent = t('group.summary', {n: data.lectures.length, teachers: data.teachers.length, subjects: data.subjects.length, sources: groups.size});
     groupMetaEl.appendChild(lineA);
 
     if (teacherLinks.length) {
@@ -621,7 +638,7 @@ function renderGroup(data) {
             : '';
         const fileName = g.url ? g.url.split('/').pop() : '';
         sub.innerHTML = [
-            `${g.lectures.length} ლექცია`,
+            t('search.lectures.count', {n: g.lectures.length}),
             date ? `განახლდა ${date}` : '',
             g.url ? `<a href="${g.url}" target="_blank" rel="noopener">${fileName}</a>` : '',
         ].filter(Boolean).join(' · ');
@@ -662,7 +679,7 @@ function buildGroupGrid(lectures) {
     const thead = document.createElement('thead');
     const headRow = document.createElement('tr');
     headRow.appendChild(document.createElement('th'));
-    for (const d of DAYS) {
+    for (const d of DAYS_ARR()) {
         const th = document.createElement('th');
         th.textContent = d;
         headRow.appendChild(th);
@@ -704,7 +721,7 @@ function makeGroupCellNode(l) {
 
     const subj = document.createElement('div');
     subj.className = 'subject';
-    subj.textContent = l.subject_name || '(უცნობი საგანი)';
+    subj.textContent = l.subject_name || ('(' + t('teacher.unknown').replace(/[()]/g,'') + ')');
     wrap.appendChild(subj);
 
     const meta = document.createElement('div');
@@ -730,7 +747,7 @@ function makeGroupCellNode(l) {
         extras.style.marginTop = '4px';
         extras.style.borderTop = '1px solid var(--border)';
         extras.style.paddingTop = '3px';
-        extras.textContent = `+${l._extra.length} ბარალელ. ლექცია`;
+        extras.textContent = `+${t('search.lectures.count', {n: l._extra.length})}`;
         extras.title = l._extra.map(x => `${x.subject_name} — ${x.teacher_name} (${x.room || '—'})`).join('\n');
         wrap.appendChild(extras);
     }
@@ -783,7 +800,7 @@ async function loadFaculties() {
         const data = await r.json();
         renderFacultyList(data.faculties || []);
     } catch (err) {
-        facultyListEl.innerHTML = '<li class="muted">შეცდომა ფაკულტეტების ჩატვირთვისას</li>';
+        facultyListEl.innerHTML = `<li class="muted">${t('search.error')}</li>`;
     }
 }
 
@@ -827,9 +844,9 @@ function renderFacultyList(items) {
             meta.className = 'meta';
             const date = new Date(f.fetched_at * 1000).toISOString().slice(0, 10);
             const structured = f.structured_rows > 0
-                ? `${f.structured_rows} ლექცია სტრუქტ.`
-                : 'მხოლოდ ტექსტი';
-            meta.textContent = `${structured} · ${f.page_count || '?'} გვერდი · ${date}`;
+                ? t('faculties.cell.lectures_struct', {n: f.structured_rows})
+                : t('faculties.cell.text_only');
+            meta.textContent = t('faculties.cell.detail', {lectures: structured, pages: (f.page_count || '?'), date: date});
             li.appendChild(name);
             li.appendChild(meta);
             li.addEventListener('click', () => loadFaculty(f.faculty_slug, kind));
@@ -860,8 +877,8 @@ async function loadFaculty(slug, kind = 'additional_pdf') {
             : '';
         facultyMetaEl.innerHTML =
             sectionLine +
-            `${structuredCount} ლექცია · ${data.page_count || '?'} გვერდი · განახლდა ${date} · ` +
-            `<a href="${data.source_url}" target="_blank" rel="noopener">PDF წყარო</a>`;
+            `${t('search.lectures.count', {n: structuredCount})} · ${t('faculties.subjlabel.pages', {n: (data.page_count || '?')})} · ${t('stats.updated', {when: date})} · ` +
+            `<a href="${data.source_url}" target="_blank" rel="noopener">${t('faculties.source')}</a>`;
 
         currentFacultyText = data.raw_text || '';
         currentLectures = data.lectures || [];
@@ -872,11 +889,10 @@ async function loadFaculty(slug, kind = 'additional_pdf') {
         switchTab(currentLectures.length > 0 ? 'structured' : 'raw');
         facultyViewEl.scrollIntoView({behavior: 'smooth', block: 'start'});
     } catch (err) {
-        facultyNameEl.textContent = 'შეცდომა მონაცემების ჩატვირთვისას';
+        facultyNameEl.textContent = t('teacher.error');
     }
 }
 
-const DAY_KA = ['', 'ორშ.', 'სამშ.', 'ოთხშ.', 'ხუთშ.', 'პარ.', 'შაბ.', 'კვ.'];
 
 function renderStructuredTable(lectures) {
     structuredTable.innerHTML = '';
@@ -888,7 +904,7 @@ function renderStructuredTable(lectures) {
 
     const thead = document.createElement('thead');
     const headRow = document.createElement('tr');
-    for (const h of ['#', 'პედაგოგი', 'საგანი', 'ფორმა', 'დღე', 'საათი', 'აუდიტორია', 'q']) {
+    for (const h of [t('faculties.col.num'), t('faculties.col.teacher'), t('faculties.col.subject'), t('faculties.col.type'), t('faculties.col.day'), t('faculties.col.times'), t('faculties.col.room'), t('faculties.col.q')]) {
         const th = document.createElement('th');
         th.textContent = h;
         headRow.appendChild(th);
@@ -912,7 +928,7 @@ function renderStructuredTable(lectures) {
         tr.appendChild(td('col-teacher', l.teacher_name || ''));
         tr.appendChild(td('col-subject', l.subject_name || ''));
         tr.appendChild(td('col-type', l.lesson_type || ''));
-        tr.appendChild(td('col-day', l.weekday ? DAY_KA[l.weekday] : (l.day_label || '')));
+        tr.appendChild(td('col-day', l.weekday ? DAY_LABEL(l.weekday) : (l.day_label || '')));
         tr.appendChild(td('col-times', (l.times || []).join(', ')));
         tr.appendChild(td('col-room', (l.rooms || []).join(', ')));
         tr.appendChild(td('col-quality', l.parse_quality));

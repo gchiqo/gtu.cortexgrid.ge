@@ -2,11 +2,13 @@
 .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
 .me-header {
+    position: relative;
     border-bottom: 1px solid var(--border);
     padding: 18px 0 14px;
     margin-bottom: 20px;
     background: linear-gradient(180deg, rgba(139, 92, 246, 0.08) 0%, transparent 100%);
 }
+.me-header .lang-switcher { top: 18px; right: 20px; }
 .me-header h1 { margin: 4px 0 4px; font-size: 22px; }
 .me-header .muted { font-size: 13px; margin: 2px 0; }
 .back-link {
@@ -103,6 +105,53 @@
 .lecture-list tbody tr:hover { background: var(--panel); }
 .lecture-list .src a { color: var(--accent); font-size: 11px; }
 .lecture-list .low-q td { opacity: 0.6; }
+
+.week-grid, .midterm-aggregate {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+}
+.week-grid {
+    border-left: 3px solid #6ea8ff;
+}
+.week-grid h2 { margin: 0 0 4px; font-size: 16px; color: #6ea8ff; }
+.week-grid p { margin: 0 0 12px; }
+
+.midterm-aggregate {
+    border-left: 3px solid #ff7b6b;
+}
+.midterm-aggregate h2 { margin: 0 0 4px; font-size: 16px; color: #ff7b6b; }
+.midterm-aggregate p { margin: 0 0 10px; }
+
+/* Personal weekly grid cell tweaks (reuses .schedule-table from style.css) */
+.week-grid .schedule-table { font-size: 11px; }
+.week-grid .schedule-table td.lesson { background: var(--accent-2); border-left: 3px solid var(--accent); }
+.week-grid .schedule-table td.lesson-add { border-left-color: #ffb86c; }
+.week-grid .grid-lesson + .grid-lesson { margin-top: 4px; padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.1); }
+.week-grid .grid-lesson .subject {
+    display: block;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    line-height: 1.2;
+}
+.week-grid .grid-lesson .subject:hover { color: var(--accent); }
+.week-grid .grid-lesson .meta { color: var(--muted); font-size: 10px; margin-top: 1px; }
+.week-grid .grid-lesson .room { color: var(--accent); font-weight: 600; font-size: 10px; margin-top: 2px; }
+
+/* Multi-teacher course header */
+.teacher-chips { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.teacher-subheading {
+    margin: 12px 0 4px;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+}
+.teacher-subheading .muted { font-size: 11px; }
 
 .midterm-block {
     margin-top: 8px;
