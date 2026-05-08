@@ -153,6 +153,43 @@
 }
 .teacher-subheading .muted { font-size: 11px; }
 
+/* Multi-teacher chip is a toggle: click to mark "this teacher does not teach me". */
+.teacher-chip {
+    cursor: pointer;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 2px 10px;
+    font: inherit;
+    font-size: 11px;
+    transition: background 0.15s, color 0.15s, opacity 0.15s;
+}
+.teacher-chip:hover { background: var(--panel); border-color: var(--accent); }
+.teacher-chip--off {
+    background: transparent;
+    color: var(--muted);
+    text-decoration: line-through;
+    opacity: 0.55;
+    border-style: dashed;
+}
+.teacher-chip--off:hover {
+    color: var(--text);
+    opacity: 0.85;
+}
+
+/* Hidden (excluded) lesson rows / grid cells. */
+.teacher-excluded { display: none !important; }
+.teacher-excluded-cell { background: var(--panel-2) !important; border-left: 0 !important; }
+.teacher-excluded-cell::after {
+    content: '—';
+    color: var(--muted);
+    opacity: 0.4;
+    display: block;
+    text-align: center;
+    padding: 4px 0;
+}
+
 .midterm-block {
     margin-top: 8px;
     padding: 10px 12px;

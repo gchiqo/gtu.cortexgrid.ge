@@ -65,6 +65,7 @@ $assetVersion = max(
     (int)@filemtime(__DIR__ . '/assets/style.css'),
     (int)@filemtime(__DIR__ . '/assets/me.css'),
     (int)@filemtime(__DIR__ . '/assets/i18n.js'),
+    (int)@filemtime(__DIR__ . '/assets/me.js'),
     (int)@filemtime(__FILE__)
 );
 
@@ -235,7 +236,13 @@ foreach ($enrichedCourses as $i => $c) {
     foreach ($c['lectures'] as $l) {
         $allLectures[] = [
             'kind' => 'regular', 'course_idx' => $i, 'course_name' => $c['meta']['subject'],
-            'weekday' => (int)$l['weekday'], 'start_time' => $l['start_time'], 'end_time' => $l['end_time'],
+            'weekday' => (int)$l['weekday'],
+            'start_time' => $l['start_time'], 'end_time' => $l['end_time'],
+            // Include the slot indices so build_personal_week_grid puts the
+            // lesson in the correct row (was bucketing everything into row 0
+            // because these keys were missing).
+            'start_slot' => (int)$l['start_slot'],
+            'end_slot'   => (int)$l['end_slot'],
             'room' => $l['room'], 'lesson_type' => $l['lesson_type'], 'group_code' => $l['group_code'],
             'teacher' => $l['teacher_name'], 'source_label' => $l['source_label'], 'source_url' => $l['source_url'],
         ];
@@ -338,7 +345,7 @@ $midtermAgg = aggregate_midterm_exams($enrichedCourses);
                         <td<?= ($cell && $cell[0]['span'] > 1) ? ' rowspan="' . $cell[0]['span'] . '"' : '' ?>
                             class="<?= $cell ? 'lesson' . ($cell[0]['kind'] === 'additional' ? ' lesson-add' : '') : 'free' ?>">
                             <?php foreach ($cell as $lesson): ?>
-                                <div class="grid-lesson">
+                                <div class="grid-lesson" data-teacher="<?= h($lesson['teacher']) ?>">
                                     <a class="subject" href="#course-<?= (int)$lesson['course_idx'] ?>">
                                         <?= h($lesson['subject']) ?>
                                     </a>
@@ -423,7 +430,7 @@ $midtermAgg = aggregate_midterm_exams($enrichedCourses);
                               : implode(', ', $l['times'] ?? []);
                 $roomStr  = $l['room'] ?? implode(', ', $l['rooms'] ?? []);
                 ?>
-                <tr class="kind-<?= h($l['kind']) ?>">
+                <tr class="kind-<?= h($l['kind']) ?>" data-teacher="<?= h($l['teacher'] ?? '') ?>">
                     <td><?= day_cell($l['weekday'] ?? null, $l['day_label'] ?? '—', $DAY_KA) ?></td>
                     <td><?= h($timeStr) ?></td>
                     <td>
@@ -487,7 +494,9 @@ $midtermAgg = aggregate_midterm_exams($enrichedCourses);
                 <?php if ($multiTeacher): ?>
                     <span class="teacher-chips">
                     <?php foreach ($teacherList as $tname): ?>
-                        <span class="chip"><?= h($tname) ?></span>
+                        <button type="button" class="chip teacher-chip"
+                                data-teacher-toggle="<?= h($tname) ?>"
+                                title="ეს პედაგოგი არ მასწავლის — დააჭირე რომ დამალო მისი ლექციები / Click to hide this teacher's lectures"><?= h($tname) ?></button>
                     <?php endforeach; ?>
                     </span>
                 <?php else: ?>
@@ -520,6 +529,7 @@ $midtermAgg = aggregate_midterm_exams($enrichedCourses);
                 : [['teacher' => $m['teacher'], 'lectures' => $c['lectures']]];
             ?>
             <?php foreach ($lectureGroups as $grp): ?>
+                <div class="teacher-group" data-teacher="<?= h($grp['teacher']) ?>">
                 <?php if ($multiTeacher): ?>
                     <h4 class="teacher-subheading">
                         <span data-i18n="me.course.lectures_for"
@@ -540,7 +550,7 @@ $midtermAgg = aggregate_midterm_exams($enrichedCourses);
                     </tr></thead>
                     <tbody>
                     <?php foreach ($grp['lectures'] as $l): ?>
-                        <tr>
+                        <tr data-teacher="<?= h($l['teacher_name'] ?? '') ?>">
                             <td><?= day_cell((int)$l['weekday'], '?', $DAY_KA) ?></td>
                             <td><?= h($l['start_time']) ?>–<?= h($l['end_time']) ?></td>
                             <td><?= h($l['room']) ?></td>
@@ -559,6 +569,7 @@ $midtermAgg = aggregate_midterm_exams($enrichedCourses);
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                </div>
             <?php endforeach; ?>
         <?php endif; ?>
 
@@ -578,7 +589,7 @@ $midtermAgg = aggregate_midterm_exams($enrichedCourses);
                 <tbody>
                 <?php foreach ($c['additional'] as $l):
                     $lowQ = isset($l['parse_quality']) && $l['parse_quality'] !== null && $l['parse_quality'] < 70; ?>
-                    <tr<?= $lowQ ? ' class="low-q"' : '' ?>>
+                    <tr data-teacher="<?= h($l['teacher_name'] ?? '') ?>"<?= $lowQ ? ' class="low-q"' : '' ?>>
                         <td><?= day_cell($l['weekday'] ? (int)$l['weekday'] : null, $l['day_label'] ?: '?', $DAY_KA) ?></td>
                         <td><?= h(implode(', ', $l['times'])) ?></td>
                         <td><?= h(implode(', ', $l['rooms'])) ?></td>
@@ -647,5 +658,6 @@ $midtermAgg = aggregate_midterm_exams($enrichedCourses);
 </footer>
 
 <script src="assets/i18n.js?v=<?= $assetVersion ?>"></script>
+<script src="assets/me.js?v=<?= $assetVersion ?>"></script>
 </body>
 </html>

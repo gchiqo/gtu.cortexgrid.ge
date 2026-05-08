@@ -104,8 +104,10 @@ async function fetchMatches(payload) {
 function renderFound(card, matches) {
     const p = card.payload;
 
-    $('name').textContent     = p.name      || '—';
-    $('school').textContent   = p.school    || '—';
+    // Top kv block — names also flip to English when available.
+    // Student name has no `nameEn` in the card, so it stays in Georgian script.
+    $('name').textContent     = p.name || '—';
+    $('school').textContent   = (_LANG === 'en' ? (p.schoolEn || p.school) : p.school) || '—';
     $('semester').textContent = p.semester ?? '—';
     $('year').textContent     = p.year      || '—';
     $('gpa').textContent      = (p.gpa ?? '—') + (p.avgResult ? ` (${p.avgResult})` : '');
@@ -114,6 +116,13 @@ function renderFound(card, matches) {
     const list = $('coursesList');
     list.innerHTML = '';
     $('t_courseHeading').textContent = pt('courses.heading', {n: p.courses.length});
+
+    // When the popup is in EN mode, prefer the card's English fields
+    // (altName / altProf). They're the official English titles GTU itself
+    // uses, so foreign students see something they recognise instead of
+    // Georgian script.
+    const useEn = (_LANG === 'en');
+    const pick = (en, ka) => useEn ? (en || ka || '') : (ka || en || '');
 
     const matchedCourses = (matches && matches.courses) || [];
     for (let i = 0; i < p.courses.length; i++) {
@@ -127,11 +136,12 @@ function renderFound(card, matches) {
         const li = document.createElement('li');
         const subj = document.createElement('div');
         subj.className = 'subject';
-        subj.textContent = c.subject || c.subjectEn || '(?)';
+        subj.textContent = pick(c.subjectEn, c.subject) || '(?)';
         const meta = document.createElement('div');
         meta.className = 'meta';
         const parts = [];
-        if (c.teacher) parts.push(c.teacher);
+        const teacherName = pick(c.teacherEn, c.teacher);
+        if (teacherName) parts.push(teacherName);
         if (c.credit) parts.push(`${c.credit}cr`);
         if (c.result) parts.push(`${c.result} (${c.score})`);
         meta.textContent = parts.join(' · ');

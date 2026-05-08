@@ -79,12 +79,14 @@ function renderResults(items) {
         resultsEl.classList.remove('show');
         return;
     }
-    for (const t of items) {
+    for (const r of items) {
         // Backward-compat for legacy responses: assume teacher if no type field.
-        const type = t.type ?? 'teacher';
+        // Loop variable is `r` (result) — `t` is reserved for the global
+        // translation function from i18n.js.
+        const type = r.type ?? 'teacher';
 
         const li = document.createElement('li');
-        li.dataset.source = t.source;
+        li.dataset.source = r.source;
         li.dataset.type   = type;
 
         const left = document.createElement('div');
@@ -94,36 +96,36 @@ function renderResults(items) {
             badge.className = 'source-badge type-subject';
             badge.textContent = t('badge.subject');
         } else {
-            badge.className = 'source-badge ' + (t.source === 'pdf' ? 'source-pdf' : 'source-html');
-            badge.textContent = t.source === 'pdf' ? t('badge.pdf') : t('badge.html');
+            badge.className = 'source-badge ' + (r.source === 'pdf' ? 'source-pdf' : 'source-html');
+            badge.textContent = r.source === 'pdf' ? t('badge.pdf') : t('badge.html');
         }
         left.appendChild(badge);
         const name = document.createElement('span');
         name.className = 'name';
-        name.textContent = t.code ? `${t.name} #${t.code}` : t.name;
+        name.textContent = r.code ? `${r.name} #${r.code}` : r.name;
         left.appendChild(name);
 
         const right = document.createElement('div');
         right.className = 'right';
-        if (t.faculties && t.faculties.length) {
+        if (r.faculties && r.faculties.length) {
             const fac = document.createElement('span');
             fac.className = 'faculties';
-            fac.textContent = t.faculties.join(', ');
+            fac.textContent = r.faculties.join(', ');
             right.appendChild(fac);
         }
         const count = document.createElement('span');
         count.className = 'count';
-        count.textContent = t('search.lectures.count', {n: t.lecture_count});
+        count.textContent = t('search.lectures.count', {n: r.lecture_count});
         right.appendChild(count);
 
         li.appendChild(left);
         li.appendChild(right);
 
-        const ref = t.ref ?? t.id;
+        const ref = r.ref ?? r.id;
         if (type === 'subject') {
-            li.addEventListener('click', () => loadSubject(t.name));
-        } else if (t.source === 'pdf') {
-            li.addEventListener('click', () => loadPdfTeacher(t.name));
+            li.addEventListener('click', () => loadSubject(r.name));
+        } else if (r.source === 'pdf') {
+            li.addEventListener('click', () => loadPdfTeacher(r.name));
         } else if (ref != null) {
             li.addEventListener('click', () => loadTeacher(ref));
         } else {
@@ -287,7 +289,7 @@ function renderSubject(data) {
     setLastRender(() => renderSubject(data));
     subjectNameEl.textContent = data.name;
 
-    const teacherChips = (data.teachers || []).map(t => `<span class="chip">${escapeHtml(t)}</span>`).join('');
+    const teacherChips = (data.teachers || []).map(name => `<span class="chip">${escapeHtml(name)}</span>`).join('');
     const facLabels = (data.faculties || []).map(shortFacultyName).join(', ');
     subjectMetaEl.innerHTML =
         `${t('search.lectures.count', {n: data.lectures.length})} · ` +
@@ -587,11 +589,11 @@ function renderGroup(data) {
         groups.get(key).lectures.push(l);
     }
 
-    const teacherLinks = (data.teachers || []).map(t => {
+    const teacherLinks = (data.teachers || []).map(name => {
         const span = document.createElement('span');
         span.className = 'chip clickable';
-        span.dataset.teacher = t;
-        span.textContent = t;
+        span.dataset.teacher = name;
+        span.textContent = name;
         return span;
     });
 

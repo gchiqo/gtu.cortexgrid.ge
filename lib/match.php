@@ -61,18 +61,21 @@ function name_like_patterns_loose(?string $value): array {
  * teacher would leak in.
  */
 function match_lectures_for_course(PDO $pdo, array $subjectCandidates, array $teacherCandidates): array {
-    // Strict first (full-phrase patterns only); fall back to loose (per-word)
-    // if the strict pass found nothing — keeps false positives rare while
-    // still letting a Georgian-script query match a Latin-stored row via the
-    // surname. Each "candidate" is a name string; we OR them together so that
-    // KA/EN forms from the card both contribute.
-    $strictSubj = merge_patterns($subjectCandidates, false);
-    $strictTch  = merge_patterns($teacherCandidates, false);
-    $rows = lecture_query($pdo, $strictSubj, $strictTch);
+    // Subject must be a FULL-phrase match — never per-word loose. A subject
+    // like "Big Data storage and processing system Hadoop" splits into words
+    // that include "data" and "system" and "storage", which over-match against
+    // unrelated subjects ("Fundamentals of *Data*base *System*s", "*Storage*
+    // accounting", etc). Real-world false positive that surfaced when a
+    // co-teacher on the vici card teaches a totally different course.
+    //
+    // Teacher CAN fall back to loose so a Georgian-stored "ცხომელიძე" still
+    // matches a Latin-only "Tskhomelidze" row and surname differences like
+    // "Avtandili" vs "Avtandil" don't drop legitimate hits.
+    $subj = merge_patterns($subjectCandidates, false);
+
+    $rows = lecture_query($pdo, $subj, merge_patterns($teacherCandidates, false));
     if (!$rows) {
-        $rows = lecture_query($pdo,
-            merge_patterns($subjectCandidates, true),
-            merge_patterns($teacherCandidates, true));
+        $rows = lecture_query($pdo, $subj, merge_patterns($teacherCandidates, true));
     }
     return $rows;
 }
@@ -118,13 +121,12 @@ function lecture_query(PDO $pdo, array $subjPats, array $tchPats): array {
  * source's section heading attached so the UI can label each block.
  */
 function match_additional_for_course(PDO $pdo, array $subjectCandidates, array $teacherCandidates): array {
-    $rows = additional_query($pdo,
-        merge_patterns($subjectCandidates, false),
-        merge_patterns($teacherCandidates, false));
+    // Same rule as lectures: strict subject only; teacher can be loose.
+    $subj = merge_patterns($subjectCandidates, false);
+
+    $rows = additional_query($pdo, $subj, merge_patterns($teacherCandidates, false));
     if (!$rows) {
-        $rows = additional_query($pdo,
-            merge_patterns($subjectCandidates, true),
-            merge_patterns($teacherCandidates, true));
+        $rows = additional_query($pdo, $subj, merge_patterns($teacherCandidates, true));
     }
     foreach ($rows as &$r) {
         $r['times'] = $r['times_csv'] ? explode(',', $r['times_csv']) : [];
