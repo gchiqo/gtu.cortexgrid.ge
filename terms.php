@@ -14,6 +14,9 @@ $updatedDate = '2026-05-08';
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Terms of Use / გამოყენების წესები — GTU ცხრილი</title>
+<meta name="description" content="GTU ცხრილის გამოყენების წესები. Terms of use for the GTU ცხრილი website and Chrome extension.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://gtu.cortexgrid.ge/terms.php">
 <link rel="stylesheet" href="assets/style.css?v=<?= $assetVersion ?>">
 <link rel="stylesheet" href="assets/legal.css?v=<?= $assetVersion ?>">
 </head>

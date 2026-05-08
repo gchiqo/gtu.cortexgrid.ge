@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /me.php
+Disallow: /lib/
+Disallow: /vendor/
+Disallow: /scripts/
+Disallow: /*?d=
+
+Sitemap: https://gtu.cortexgrid.ge/sitemap.xml

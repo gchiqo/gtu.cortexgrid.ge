@@ -21,7 +21,76 @@ $assetVersion = max(
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n="site.subtitle.search">GTU ცხრილი — ძიება</title>
+<title>GTU ცხრილი — ლექციების ცხრილი | საქართველოს ტექნიკური უნივერსიტეტი (GTU Schedule)</title>
+<meta name="description" content="GTU ცხრილი — ეძებე საქართველოს ტექნიკური უნივერსიტეტის (სტუ) პედაგოგების, საგნებისა და ჯგუფების ცხრილი ერთ ადგილას. Search the Georgian Technical University (GTU) class schedule by teacher, subject, or group code.">
+<meta name="keywords" content="gtu, gtu cxrili, gtu ცხრილი, სტუ, სტუ ცხრილი, ცხრილი, ლექციების ცხრილი, ტექნიკური უნივერსიტეტი, ტექნიკური უნივერსიტეტი ცხრილი, საქართველოს ტექნიკური უნივერსიტეტი, georgian technical university, georgian technical university schedule, gtu schedule, gtu ge, leqtori, leqtori.gtu.ge, ჯგუფის ცხრილი, პედაგოგის ცხრილი">
+<meta name="author" content="gtu.cortexgrid.ge">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://gtu.cortexgrid.ge/">
+<link rel="alternate" hreflang="ka" href="https://gtu.cortexgrid.ge/">
+<link rel="alternate" hreflang="en" href="https://gtu.cortexgrid.ge/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://gtu.cortexgrid.ge/">
+<link rel="icon" type="image/png" sizes="32x32" href="extension/icons/icon-32.png">
+<link rel="icon" type="image/png" sizes="128x128" href="extension/icons/icon-128.png">
+<link rel="apple-touch-icon" sizes="128x128" href="extension/icons/icon-128.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GTU ცხრილი">
+<meta property="og:title" content="GTU ცხრილი — საქართველოს ტექნიკური უნივერსიტეტის ლექციების ცხრილი">
+<meta property="og:description" content="ეძებე GTU პედაგოგების, საგნებისა და ჯგუფების ცხრილი. Search Georgian Technical University class schedule by teacher, subject, or group.">
+<meta property="og:url" content="https://gtu.cortexgrid.ge/">
+<meta property="og:image" content="https://gtu.cortexgrid.ge/assets/og-image.png">
+<meta property="og:image:width" content="1400">
+<meta property="og:image:height" content="560">
+<meta property="og:locale" content="ka_GE">
+<meta property="og:locale:alternate" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GTU ცხრილი — Georgian Technical University Schedule">
+<meta name="twitter:description" content="ეძებე GTU ლექციების ცხრილი. Search GTU class schedule by teacher, subject, or group code.">
+<meta name="twitter:image" content="https://gtu.cortexgrid.ge/assets/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://gtu.cortexgrid.ge/#website",
+      "url": "https://gtu.cortexgrid.ge/",
+      "name": "GTU ცხრილი",
+      "alternateName": ["GTU Schedule", "GTU cxrili", "სტუ ცხრილი", "Georgian Technical University Schedule"],
+      "description": "საქართველოს ტექნიკური უნივერსიტეტის ლექციების ცხრილის ძიება. Search the Georgian Technical University class schedule.",
+      "inLanguage": ["ka", "en"],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://gtu.cortexgrid.ge/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebApplication",
+      "name": "GTU ცხრილი",
+      "url": "https://gtu.cortexgrid.ge/",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any (web browser)",
+      "browserRequirements": "Requires JavaScript",
+      "inLanguage": ["ka", "en"],
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GEL" },
+      "about": {
+        "@type": "CollegeOrUniversity",
+        "name": "საქართველოს ტექნიკური უნივერსიტეტი",
+        "alternateName": ["Georgian Technical University", "GTU", "სტუ"],
+        "url": "https://gtu.ge/"
+      }
+    }
+  ]
+}
+</script>
+
 <link rel="stylesheet" href="assets/style.css?v=<?= $assetVersion ?>">
 </head>
 <body>
