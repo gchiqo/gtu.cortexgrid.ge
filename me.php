@@ -655,6 +655,11 @@ $midtermAgg = aggregate_midterm_exams($enrichedCourses);
         მონაცემები მოდის leqtori.gtu.ge-ის ჩვენ მიერ სკანირებულ ვერსიიდან.
         პერსონალური ინფო (შენი card) მხოლოდ ბრაუზერში რჩება — სერვერზე არაფერი არ ინახება.
     </p>
+    <p class="muted" style="margin-top: 8px;">
+        <a href="/privacy.php">Privacy</a> ·
+        <a href="/terms.php">Terms</a> ·
+        <a href="mailto:voidpoko@gmail.com">voidpoko@gmail.com</a>
+    </p>
 </footer>
 
 <script src="assets/i18n.js?v=<?= $assetVersion ?>"></script>

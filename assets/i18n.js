@@ -157,7 +157,7 @@ const I18N_DICT = {
         'me.footer':                  'მონაცემები მოდის leqtori.gtu.ge-ის ჩვენ მიერ სკანირებულ ვერსიიდან. პერსონალური ინფო (შენი card) მხოლოდ ბრაუზერში რჩება — სერვერზე არაფერი არ ინახება.',
 
         // Footer
-        'footer.html':              'მონაცემები: <a href="https://leqtori.gtu.ge/" target="_blank" rel="noopener">leqtori.gtu.ge</a>. ეს არ არის უნივერსიტეტის ოფიციალური საიტი — გადაამოწმე კრიტიკული ცვლილებები.',
+        'footer.html':              'მონაცემები: <a href="https://leqtori.gtu.ge/" target="_blank" rel="noopener">leqtori.gtu.ge</a>. ეს არ არის უნივერსიტეტის ოფიციალური საიტი — გადაამოწმე კრიტიკული ცვლილებები. <a href="/privacy.php">კონფიდენციალურობა</a> · <a href="/terms.php">წესები</a> · <a href="mailto:voidpoko@gmail.com">voidpoko@gmail.com</a>',
 
         // Days
         'day.1': 'ორშ.', 'day.2': 'სამშ.', 'day.3': 'ოთხშ.', 'day.4': 'ხუთშ.',
@@ -291,7 +291,7 @@ const I18N_DICT = {
         'me.course.credits':          '{n} credits',
         'me.footer':                  'Data comes from our scrape of leqtori.gtu.ge. Personal info (your card) stays in your browser only — nothing is stored on the server.',
 
-        'footer.html':              'Data: <a href="https://leqtori.gtu.ge/" target="_blank" rel="noopener">leqtori.gtu.ge</a>. This is not the official university site — verify critical changes there.',
+        'footer.html':              'Data: <a href="https://leqtori.gtu.ge/" target="_blank" rel="noopener">leqtori.gtu.ge</a>. This is not the official university site — verify critical changes there. <a href="/privacy.php">Privacy</a> · <a href="/terms.php">Terms</a> · <a href="mailto:voidpoko@gmail.com">voidpoko@gmail.com</a>',
 
         'day.1': 'Mon', 'day.2': 'Tue', 'day.3': 'Wed', 'day.4': 'Thu',
         'day.5': 'Fri', 'day.6': 'Sat', 'day.7': 'Sun',
@@ -375,6 +375,15 @@ function applyTranslations() {
     document.querySelectorAll('[data-day]').forEach(el => {
         const n = parseInt(el.dataset.day, 10);
         if (n >= 1 && n <= 7) el.textContent = t('day.' + n);
+    });
+
+    // Long-form bilingual blocks: <section data-i18n-lang="ka">…</section>
+    // and <section data-i18n-lang="en">…</section>. Used for privacy/terms
+    // pages where the text is too long to live in the dictionary. We just
+    // show the block matching the active language and hide the others.
+    const cur = getLang();
+    document.querySelectorAll('[data-i18n-lang]').forEach(el => {
+        el.style.display = (el.dataset.i18nLang === cur) ? '' : 'none';
     });
 
     document.querySelectorAll('.lang-switcher [data-lang]').forEach(btn => {

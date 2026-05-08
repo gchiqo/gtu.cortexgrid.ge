@@ -113,6 +113,9 @@ $assetVersion = max(
     <p class="muted" data-i18n-html="footer.html">
         მონაცემები: <a href="https://leqtori.gtu.ge/" target="_blank" rel="noopener">leqtori.gtu.ge</a>.
         ეს არ არის უნივერსიტეტის ოფიციალური საიტი — გადაამოწმე კრიტიკული ცვლილებები.
+        <a href="/privacy.php">კონფიდენციალურობა</a> ·
+        <a href="/terms.php">წესები</a> ·
+        <a href="mailto:voidpoko@gmail.com">voidpoko@gmail.com</a>
     </p>
 </footer>
 
