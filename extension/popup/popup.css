@@ -62,6 +62,30 @@ section.hidden, .hidden { display: none; }
 .courses .course-stats { color: #6ea8ff; font-weight: 500; }
 .courses .next-exam { color: #ff7b6b; font-weight: 500; }
 
+.courses .course-lectures {
+    margin-top: 6px;
+    padding-top: 5px;
+    border-top: 1px dashed rgba(139, 92, 246, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.courses .lec-line {
+    color: #e7e9ee;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+    padding-left: 14px;
+    position: relative;
+}
+.courses .lec-line::before {
+    content: '🗓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 9px;
+    opacity: 0.55;
+}
+
 .small { font-size: 11px; }
 .cant-find {
     margin-top: 10px;

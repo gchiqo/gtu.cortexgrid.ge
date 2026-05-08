@@ -155,6 +155,24 @@ function renderFound(card, matches) {
 
         li.appendChild(subj);
         li.appendChild(meta);
+
+        // Concrete lecture lines: day · time · room. Combines regular +
+        // additional matches; regular lectures have a fixed slot range so we
+        // show start_time–end_time, additional rows have a list of times so
+        // we show each entry as its own line.
+        const lecLines = collectLectureLines(m.lectures || [], m.additional || []);
+        if (lecLines.length) {
+            const lecBox = document.createElement('div');
+            lecBox.className = 'course-lectures';
+            for (const ln of lecLines) {
+                const line = document.createElement('div');
+                line.className = 'lec-line';
+                line.textContent = ln;
+                lecBox.appendChild(line);
+            }
+            li.appendChild(lecBox);
+        }
+
         if (statParts.length) li.appendChild(stats);
 
         if (nextExam) {
@@ -191,6 +209,51 @@ function renderFound(card, matches) {
         try { $('rawJson').textContent = JSON.stringify(card.json, null, 2); }
         catch { $('rawJson').textContent = String(card.json); }
     }
+}
+
+/**
+ * Build the compact "day · time · room" lines we show under each course.
+ * Sorted by weekday then by time so they read like a mini-week.
+ *
+ * Regular lectures have a fixed start_time / end_time range (one line each).
+ * Additional rows have a list of `times[]` and `rooms[]` — one line per time
+ * entry, paired with the matching room when the array lengths agree.
+ */
+function collectLectureLines(regular, additional) {
+    const out = [];
+    const dayOf = (n) => n ? pt('day.' + n) : '';
+
+    for (const l of regular) {
+        const day = dayOf(l.weekday);
+        const t = (l.start_time && l.end_time)
+            ? `${(l.start_time + '').slice(0,5)}–${(l.end_time + '').slice(0,5)}`
+            : '';
+        const r = l.room || '';
+        if (!day && !t) continue;
+        out.push({ key: (l.weekday ?? 99) + '|' + (l.start_time ?? ''),
+                   text: [day, t, r].filter(Boolean).join(' · ') });
+    }
+
+    for (const l of additional) {
+        const day = dayOf(l.weekday) || (l.day_label || '');
+        const times = Array.isArray(l.times) ? l.times : [];
+        const rooms = Array.isArray(l.rooms) ? l.rooms : [];
+        if (times.length === 0) {
+            out.push({ key: (l.weekday ?? 98) + '|', text: [day, rooms.join(', ')].filter(Boolean).join(' · ') });
+            continue;
+        }
+        for (let i = 0; i < times.length; i++) {
+            const t = times[i];
+            const r = rooms[i] || rooms[0] || '';
+            out.push({ key: (l.weekday ?? 98) + '|' + t,
+                       text: [day, t, r].filter(Boolean).join(' · ') });
+        }
+    }
+
+    out.sort((a, b) => a.key.localeCompare(b.key));
+    // Dedupe identical adjacent entries.
+    const seen = new Set();
+    return out.map(o => o.text).filter(s => !seen.has(s) && (seen.add(s) || true));
 }
 
 /** Pick the next exam at or after today; falls back to first listed if none. */

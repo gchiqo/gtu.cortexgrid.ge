@@ -34,6 +34,8 @@ const POPUP_DICT = {
         'debug.raw':        'raw card JSON (debug)',
         'lang.toggle.ka':   'ქარ',
         'lang.toggle.en':   'ENG',
+        'day.1': 'ორშ.', 'day.2': 'სამშ.', 'day.3': 'ოთხშ.', 'day.4': 'ხუთშ.',
+        'day.5': 'პარ.', 'day.6': 'შაბ.',  'day.7': 'კვ.',
     },
     en: {
         'title':            'GTU Schedule',
@@ -62,6 +64,8 @@ const POPUP_DICT = {
         'debug.raw':        'raw card JSON (debug)',
         'lang.toggle.ka':   'ქარ',
         'lang.toggle.en':   'ENG',
+        'day.1': 'Mon', 'day.2': 'Tue', 'day.3': 'Wed', 'day.4': 'Thu',
+        'day.5': 'Fri', 'day.6': 'Sat', 'day.7': 'Sun',
     },
 };
 
