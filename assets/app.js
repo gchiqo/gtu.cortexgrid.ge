@@ -34,9 +34,16 @@ const subjectView       = $('#subjectView');
 const subjectNameEl     = $('#subjectName');
 const subjectMetaEl     = $('#subjectMeta');
 const subjectTable      = $('#subjectTable');
+const allView           = $('#allView');
+const allTitleEl        = $('#allTitle');
+const allMetaEl         = $('#allMeta');
+const allContainerEl    = $('#allContainer');
+const showAllBtn        = $('#showAllBtn');
+const hideAllBtn        = $('#hideAllBtn');
 
 let searchTimer = null;
 let lastQuery = null;
+let lastResults = [];
 
 qInput.addEventListener('input', () => {
     clearTimeout(searchTimer);
@@ -75,6 +82,8 @@ async function runSearch() {
 
 function renderResults(items) {
     resultsEl.innerHTML = '';
+    lastResults = items;
+    updateShowAllBtn();
     if (!items.length) {
         resultsEl.classList.remove('show');
         return;
@@ -141,6 +150,7 @@ function hideAllDetailViews() {
     teacherView.classList.add('hidden');
     pdfTeacherView.classList.add('hidden');
     subjectView.classList.add('hidden');
+    allView.classList.add('hidden');
 }
 
 async function loadTeacher(id) {
@@ -183,9 +193,16 @@ async function loadPdfTeacher(name) {
 
 function renderPdfTeacher(data) {
     setLastRender(() => renderPdfTeacher(data));
-    pdfTeacherNameEl.textContent = data.name;
+    renderPdfTeacherInto({
+        nameEl:  pdfTeacherNameEl,
+        metaEl:  pdfTeacherMetaEl,
+        tableEl: pdfTeacherTable,
+    }, data);
+}
 
-    // Source labels: each lecture row carries source_label; collect unique ones.
+function renderPdfTeacherInto(target, data) {
+    target.nameEl.textContent = data.name;
+
     const sources = new Map();
     for (const l of data.lectures) {
         const k = l.source_url || l.source_label;
@@ -203,18 +220,18 @@ function renderPdfTeacher(data) {
             ? `<a href="${s.url}" target="_blank" rel="noopener">${escapeHtml(s.label)}</a>`
             : escapeHtml(s.label)
     ).join(' · ');
-    pdfTeacherMetaEl.innerHTML =
+    target.metaEl.innerHTML =
         `${t('search.lectures.count', {n: data.lectures.length})} · ${facLinks}` +
         (sourceLinks ? `<br><span class="muted">წყარო: ${sourceLinks}</span>` : '');
 
-    pdfTeacherMetaEl.querySelectorAll('.faculty-link').forEach(a => {
+    target.metaEl.querySelectorAll('.faculty-link').forEach(a => {
         a.addEventListener('click', (e) => {
             e.preventDefault();
             loadFaculty(a.dataset.faculty);
         });
     });
 
-    pdfTeacherTable.innerHTML = '';
+    target.tableEl.innerHTML = '';
     const thead = document.createElement('thead');
     const headRow = document.createElement('tr');
     for (const h of [t('subject.col.source'), t('pdfteacher.col.faculty'), t('pdfteacher.col.subject'), t('pdfteacher.col.type'), t('pdfteacher.col.day'), t('pdfteacher.col.times'), t('pdfteacher.col.room')]) {
@@ -223,7 +240,7 @@ function renderPdfTeacher(data) {
         headRow.appendChild(th);
     }
     thead.appendChild(headRow);
-    pdfTeacherTable.appendChild(thead);
+    target.tableEl.appendChild(thead);
 
     const tbody = document.createElement('tbody');
     for (const l of data.lectures) {
@@ -246,7 +263,7 @@ function renderPdfTeacher(data) {
         tr.appendChild(td('col-room', (l.rooms || []).join(', ')));
         tbody.appendChild(tr);
     }
-    pdfTeacherTable.appendChild(tbody);
+    target.tableEl.appendChild(tbody);
 }
 
 function shortSourceLabel(l) {
@@ -287,16 +304,24 @@ async function loadSubject(name) {
 
 function renderSubject(data) {
     setLastRender(() => renderSubject(data));
-    subjectNameEl.textContent = data.name;
+    renderSubjectInto({
+        nameEl:  subjectNameEl,
+        metaEl:  subjectMetaEl,
+        tableEl: subjectTable,
+    }, data);
+}
+
+function renderSubjectInto(target, data) {
+    target.nameEl.textContent = data.name;
 
     const teacherChips = (data.teachers || []).map(name => `<span class="chip">${escapeHtml(name)}</span>`).join('');
     const facLabels = (data.faculties || []).map(shortFacultyName).join(', ');
-    subjectMetaEl.innerHTML =
+    target.metaEl.innerHTML =
         `${t('search.lectures.count', {n: data.lectures.length})} · ` +
         (facLabels ? `${t('pdfteacher.col.faculty')}: ${facLabels} · ` : '') +
         (teacherChips ? `<span class="chips">${teacherChips}</span>` : '');
 
-    subjectTable.innerHTML = '';
+    target.tableEl.innerHTML = '';
     const thead = document.createElement('thead');
     const headRow = document.createElement('tr');
     for (const h of [t('subject.col.source'), t('subject.col.teacher'), t('subject.col.day'), t('subject.col.times'), t('subject.col.room'), t('subject.col.type'), t('subject.col.faculty')]) {
@@ -305,7 +330,7 @@ function renderSubject(data) {
         headRow.appendChild(th);
     }
     thead.appendChild(headRow);
-    subjectTable.appendChild(thead);
+    target.tableEl.appendChild(thead);
 
     const tbody = document.createElement('tbody');
     for (const l of data.lectures) {
@@ -325,8 +350,6 @@ function renderSubject(data) {
         tr.appendChild(td('col-times', (l.times || []).join(', ')));
         tr.appendChild(td('col-room', (l.rooms || []).join(', ')));
         tr.appendChild(td('col-type', l.lesson_type || ''));
-        // Combine faculty + section into one cell so the user knows whether a
-        // result came from "VIII კვირის ცხრილი" or "დამატებითი კურსები" etc.
         const ctx = [
             l.faculty_slug ? shortFacultyName(l.faculty_slug) : null,
             l.source_section,
@@ -334,7 +357,7 @@ function renderSubject(data) {
         tr.appendChild(td('col-faculty', ctx || '—'));
         tbody.appendChild(tr);
     }
-    subjectTable.appendChild(tbody);
+    target.tableEl.appendChild(tbody);
 }
 
 function escapeHtml(s) {
@@ -343,13 +366,137 @@ function escapeHtml(s) {
     }[c]));
 }
 
+// ---------- Show-all view ----------
+
+function updateShowAllBtn() {
+    if (!showAllBtn) return;
+    if (lastResults.length >= 2) {
+        showAllBtn.dataset.argN = String(lastResults.length);
+        showAllBtn.textContent = t('search.show_all', {n: lastResults.length});
+        showAllBtn.classList.remove('hidden');
+    } else {
+        showAllBtn.classList.add('hidden');
+    }
+}
+
+async function loadAllResults() {
+    if (!lastResults.length) return;
+    const items = lastResults.slice();
+
+    resultsEl.classList.remove('show');
+    hideAllDetailViews();
+    allView.classList.remove('hidden');
+    allTitleEl.textContent = t('search.show_all', {n: items.length});
+    allMetaEl.textContent = t('search.show_all.loading');
+    allContainerEl.replaceChildren();
+
+    setLastRender(() => loadAllResults());
+
+    const cards = items.map((r) => {
+        const card = document.createElement('article');
+        card.className = 'all-card';
+
+        const header = document.createElement('div');
+        header.className = 'all-card-header';
+
+        const type = r.type ?? 'teacher';
+        const badge = document.createElement('span');
+        if (type === 'subject') {
+            badge.className = 'source-badge type-subject';
+            badge.textContent = t('badge.subject');
+        } else {
+            badge.className = 'source-badge ' + (r.source === 'pdf' ? 'source-pdf' : 'source-html');
+            badge.textContent = r.source === 'pdf' ? t('badge.pdf') : t('badge.html');
+        }
+        header.appendChild(badge);
+
+        const h3 = document.createElement('h3');
+        h3.textContent = r.code ? `${r.name} #${r.code}` : r.name;
+        header.appendChild(h3);
+
+        card.appendChild(header);
+
+        const meta = document.createElement('p');
+        meta.className = 'all-card-meta muted';
+        card.appendChild(meta);
+
+        const content = document.createElement('div');
+        content.className = 'all-card-content';
+        const loading = document.createElement('div');
+        loading.className = 'all-card-loading';
+        loading.textContent = t('search.show_all.loading');
+        content.appendChild(loading);
+        card.appendChild(content);
+
+        allContainerEl.appendChild(card);
+        return { card, headerH3: h3, meta, content, item: r };
+    });
+
+    await Promise.all(cards.map(async (ctx) => {
+        const r = ctx.item;
+        const type = r.type ?? 'teacher';
+        const ref = r.ref ?? r.id;
+        try {
+            if (type === 'subject') {
+                const resp = await fetch('api/subject.php?name=' + encodeURIComponent(r.name));
+                const data = await resp.json();
+                if (data.error) throw new Error(data.error);
+                ctx.content.replaceChildren();
+                const tbl = document.createElement('table');
+                tbl.className = 'structured-table';
+                ctx.content.appendChild(tbl);
+                renderSubjectInto({ nameEl: ctx.headerH3, metaEl: ctx.meta, tableEl: tbl }, data);
+            } else if (r.source === 'pdf') {
+                const resp = await fetch('api/pdf_teacher.php?name=' + encodeURIComponent(r.name));
+                const data = await resp.json();
+                if (data.error) throw new Error(data.error);
+                ctx.content.replaceChildren();
+                const tbl = document.createElement('table');
+                tbl.className = 'structured-table';
+                ctx.content.appendChild(tbl);
+                renderPdfTeacherInto({ nameEl: ctx.headerH3, metaEl: ctx.meta, tableEl: tbl }, data);
+            } else if (ref != null) {
+                const resp = await fetch('api/teacher.php?id=' + encodeURIComponent(ref));
+                const data = await resp.json();
+                if (data.error) throw new Error(data.error);
+                renderTeacherInto({ nameEl: ctx.headerH3, metaEl: ctx.meta, scheduleEl: ctx.content }, data);
+            } else {
+                ctx.content.replaceChildren();
+                const err = document.createElement('div');
+                err.className = 'all-card-error';
+                err.textContent = t('search.show_all.empty');
+                ctx.content.appendChild(err);
+            }
+        } catch (err) {
+            ctx.content.replaceChildren();
+            const e = document.createElement('div');
+            e.className = 'all-card-error';
+            e.textContent = String(err.message || err);
+            ctx.content.appendChild(e);
+        }
+    }));
+
+    allMetaEl.textContent = '';
+    allView.scrollIntoView({behavior: 'smooth', block: 'start'});
+}
+
+showAllBtn.addEventListener('click', loadAllResults);
+hideAllBtn.addEventListener('click', () => {
+    allView.classList.add('hidden');
+});
+
 function renderTeacher(data) {
     setLastRender(() => renderTeacher(data));
-    teacherNameEl.textContent = data.teacher.name;
+    renderTeacherInto({
+        nameEl:     teacherNameEl,
+        metaEl:     teacherMetaEl,
+        scheduleEl: scheduleEl,
+    }, data);
+}
 
-    // Group lectures by source so the user sees a separate grid per source
-    // (e.g. "პროფესიული სწავლების ცხრილი" vs "VIII კვირის სასწავლო ცხრილი" —
-    // different scrapes of the same person, with different lecture sets).
+function renderTeacherInto(target, data) {
+    target.nameEl.textContent = data.teacher.name;
+
     const groups = new Map();
     for (const l of data.lectures) {
         const key = l.source_url ?? 'unknown';
@@ -365,10 +512,9 @@ function renderTeacher(data) {
         groups.get(key).lectures.push(l);
     }
 
-    const meta = [t('teacher.summary', {n: data.lectures.length, sources: groups.size})];
-    teacherMetaEl.innerHTML = meta.join(' · ');
+    target.metaEl.innerHTML = t('teacher.summary', {n: data.lectures.length, sources: groups.size});
 
-    scheduleEl.replaceChildren();
+    target.scheduleEl.replaceChildren();
     for (const g of groups.values()) {
         const wrap = document.createElement('section');
         wrap.className = 'source-group';
@@ -392,7 +538,7 @@ function renderTeacher(data) {
         wrap.appendChild(sub);
 
         wrap.appendChild(buildScheduleGrid(g.lectures));
-        scheduleEl.appendChild(wrap);
+        target.scheduleEl.appendChild(wrap);
     }
 }
 

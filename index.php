@@ -116,6 +116,16 @@ $assetVersion = max(
         <input id="q" type="search" data-i18n-placeholder="search.placeholder"
                placeholder="შეიყვანე პედაგოგის გვარი ან საგანი…" autocomplete="off" autofocus>
         <ul id="results" class="results"></ul>
+        <button id="showAllBtn" class="show-all-btn hidden" type="button" data-i18n="search.show_all" data-arg-n="0"></button>
+    </section>
+
+    <section id="allView" class="hidden">
+        <header class="all-header">
+            <h2 id="allTitle"></h2>
+            <button id="hideAllBtn" type="button" class="hide-all-btn" data-i18n="search.show_all.hide">დამალვა</button>
+        </header>
+        <p class="muted" id="allMeta"></p>
+        <div id="allContainer"></div>
     </section>
 
     <section id="groupSection" class="group-section">
