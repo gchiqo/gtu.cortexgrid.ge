@@ -384,8 +384,89 @@ a:hover { text-decoration: underline; }
 
 footer { padding-top: 32px; padding-bottom: 32px; }
 
+/* ──────────────────────────────────────────────────────────────────────
+   Mobile: tablets / large phones
+   ────────────────────────────────────────────────────────────────────── */
 @media (max-width: 720px) {
+    header, main, footer { padding: 14px 14px; }
+    header h1 { font-size: 18px; padding-right: 92px; }
+    header .muted { font-size: 12px; line-height: 1.5; }
+
     .schedule-table th, .schedule-table td { font-size: 11px; padding: 4px 5px; }
     .schedule-table .slot-label { width: 56px; }
-    header h1 { font-size: 18px; }
+
+    /* Faculty cards a touch tighter */
+    .faculty-list { gap: 6px; }
+    .faculty-list li { padding: 10px 12px; }
+
+    /* All-view header gap */
+    #allView header.all-header { gap: 8px; }
+
+    /* Group section */
+    .group-section { padding: 14px 16px; }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   Mobile: phones (≤480 px)
+   • Wide data tables become horizontally scrollable so they don't overflow
+     the viewport. Pure-CSS approach — no markup change required.
+   • Bigger touch targets on the lang switcher and buttons.
+   ────────────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+    header, main, footer { padding: 12px 12px; }
+
+    header h1 { font-size: 17px; }
+    header .muted { font-size: 11px; }
+
+    /* Search input: keep the 16px font-size so iOS doesn't auto-zoom on focus. */
+    .search input { padding: 13px 14px; font-size: 16px; }
+
+    /* Show-all / hide-all: bigger touch targets */
+    .show-all-btn { padding: 11px 14px; font-size: 13px; }
+    #allView .hide-all-btn { padding: 7px 12px; font-size: 12px; }
+
+    /* Lang switcher: bigger tap area */
+    .lang-switcher button { padding: 6px 12px; font-size: 12px; }
+
+    /* Section heading sizes */
+    .group-section h2,
+    #facultiesSection h2 { font-size: 16px; }
+    #teacherName, #subjectName, #pdfTeacherName { font-size: 18px; }
+
+    /* Faculty cards: single column, less padding */
+    .faculty-list { grid-template-columns: 1fr; }
+    .faculty-list li { padding: 10px 12px; }
+
+    /* All-cards: a touch tighter, header allowed to wrap */
+    .all-card { padding: 12px 14px; }
+    .all-card > .all-card-header h3 { font-size: 15px; }
+
+    /* Group section padding */
+    .group-section { padding: 12px 14px; }
+
+    /* Tables: horizontal scroll instead of overflow.
+       The `display: block` trick keeps the table semantics inside but lets
+       the table itself act as a scrollable container.                    */
+    .structured-table,
+    .schedule-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+    }
+    .schedule-table   { min-width: 560px; }   /* 6 days + slot col, readable */
+    .structured-table { min-width: 620px; }   /* 7 cols, keeps columns sane */
+
+    /* Sticky thead on mobile fights with display:block on Safari — drop it. */
+    .structured-table thead th { position: static; }
+
+    /* Long Georgian subject names + URL-like file links shouldn't push the
+       page wider than the viewport. */
+    .lesson .subject,
+    .source-sub,
+    header .muted,
+    .all-card-meta {
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
 }

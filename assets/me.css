@@ -279,8 +279,61 @@
 .me-footer { padding: 24px 0 32px; text-align: center; }
 .me-footer p { margin: 0; }
 
+/* ──────────────────────────────────────────────────────────────────────
+   Mobile: tablets / large phones (≤720 px)
+   ────────────────────────────────────────────────────────────────────── */
 @media (max-width: 720px) {
+    .container { padding: 0 14px; }
+    .me-header { padding: 14px 0 10px; }
+    .me-header .lang-switcher { top: 14px; right: 14px; }
+    .me-header h1 { font-size: 18px; padding-right: 92px; }
+
+    .course-card { padding: 14px 16px; }
+    .course-head h2 { font-size: 15px; }
+
+    .week-grid, .midterm-aggregate, .all-lectures {
+        padding: 14px 16px;
+    }
+    .week-grid h2, .midterm-aggregate h2, .all-lectures h2 { font-size: 15px; }
+
     .lecture-list { font-size: 12px; }
     .lecture-list thead th, .lecture-list tbody td { padding: 4px 6px; }
-    .course-head h2 { font-size: 15px; }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   Mobile: phones (≤480 px)
+   • Tables horizontal-scroll so the personal grid doesn't crush.
+   • Tighter container padding to give cards more breathing room.
+   ────────────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .container { padding: 0 10px; }
+
+    .me-header { padding: 12px 0 8px; }
+    .me-header h1 { font-size: 16px; }
+    .me-header .muted { font-size: 12px; }
+
+    .course-card, .week-grid, .midterm-aggregate, .all-lectures {
+        padding: 12px 14px;
+    }
+    .course-head h2 { font-size: 14px; }
+
+    /* Tables: horizontal scroll */
+    .lecture-list,
+    .exams-list,
+    .week-grid .schedule-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+    }
+    .week-grid .schedule-table { min-width: 560px; }
+    .lecture-list             { min-width: 520px; }
+    .exams-list               { min-width: 380px; }
+
+    /* Midterm block + headings tighter */
+    .midterm-block { padding: 8px 10px; }
+    .midterm-head { font-size: 12px; }
+
+    /* Multi-teacher subheading wraps better */
+    .teacher-subheading { font-size: 11px; }
 }
