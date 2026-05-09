@@ -216,6 +216,6 @@ $updatedDate = '2026-05-08';
     </p>
 </footer>
 
-<script src="assets/i18n.js?v=<?= $assetVersion ?>"></script>
+<script src="assets/i18n.js?v=<?= $assetVersion ?>" defer></script>
 </body>
 </html>

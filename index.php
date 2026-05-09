@@ -10,6 +10,25 @@ $stats = [
 ];
 $lastSource = $pdo->query('SELECT url, fetched_at FROM source ORDER BY fetched_at DESC LIMIT 1')->fetch();
 
+// Server-render faculty list so the section has its final height on first
+// paint — eliminates the layout shift the API-driven version was causing.
+// Mirror the query in api/faculties.php exactly.
+$facultyRows = $pdo->query(
+    "SELECT p.faculty_slug, p.faculty_name, p.page_count, p.fetched_at, p.kind,
+            COUNT(al.id) AS structured_rows
+     FROM pdf_doc p
+     JOIN source s ON s.id = p.source_id
+     LEFT JOIN additional_lecture al ON al.pdf_doc_id = p.id
+     GROUP BY p.id, p.faculty_slug, p.faculty_name, p.page_count, p.fetched_at, p.kind
+     ORDER BY p.kind, structured_rows DESC, p.faculty_name"
+)->fetchAll();
+$facultiesByKind = ['additional_pdf' => [], 'midterm_pdf' => []];
+foreach ($facultyRows as $r) {
+    $kind = $r['kind'] ?? 'additional_pdf';
+    if (!isset($facultiesByKind[$kind])) $facultiesByKind[$kind] = [];
+    $facultiesByKind[$kind][] = $r;
+}
+
 $assetVersion = max(
     (int)@filemtime(__DIR__ . '/assets/app.js'),
     (int)@filemtime(__DIR__ . '/assets/style.css'),
@@ -167,7 +186,34 @@ $assetVersion = max(
             ფაკულტეტების მიხედვით. PDF-ის ტექსტი ამოღებულია ბრაუზერში სასაძიებლად
             (Ctrl+F). რთული სტრუქტურის ფაკულტეტებს ჯერ მხოლოდ raw სახით ვინახავთ.
         </p>
-        <ul id="facultyList" class="faculty-list"></ul>
+        <ul id="facultyList" class="faculty-list" data-ssr="1">
+<?php
+$kindI18n = ['additional_pdf' => 'faculties.kind.add', 'midterm_pdf' => 'faculties.kind.midterm'];
+$kindFallback = ['additional_pdf' => 'დამატებითი სასწავლო კურსები', 'midterm_pdf' => 'შუალედური გამოცდები'];
+foreach ($facultiesByKind as $kind => $rows):
+    if (!$rows) continue; ?>
+            <li class="faculty-kind-heading" data-i18n="<?= $kindI18n[$kind] ?? '' ?>"><?= htmlspecialchars($kindFallback[$kind] ?? $kind) ?></li>
+<?php   foreach ($rows as $f):
+        $structuredRows = (int)$f['structured_rows'];
+        $date = date('Y-m-d', (int)$f['fetched_at']);
+        $pages = $f['page_count'] !== null ? (int)$f['page_count'] : '?'; ?>
+            <li data-slug="<?= htmlspecialchars($f['faculty_slug']) ?>" data-kind="<?= htmlspecialchars($kind) ?>">
+                <div class="name"><?= htmlspecialchars($f['faculty_name']) ?></div>
+                <div class="meta">
+<?php       if ($structuredRows > 0): ?>
+                    <span data-i18n="faculties.cell.lectures_struct" data-arg-n="<?= $structuredRows ?>"><?= $structuredRows ?> ლექცია სტრუქტ.</span>
+<?php       else: ?>
+                    <span data-i18n="faculties.cell.text_only">მხოლოდ ტექსტი</span>
+<?php       endif; ?>
+                    ·
+                    <span data-i18n="faculties.subjlabel.pages" data-arg-n="<?= $pages ?>"><?= $pages ?> გვერდი</span>
+                    ·
+                    <span><?= htmlspecialchars($date) ?></span>
+                </div>
+            </li>
+<?php   endforeach;
+endforeach; ?>
+        </ul>
 
         <article id="facultyView" class="hidden">
             <header class="faculty-header">
@@ -200,7 +246,7 @@ $assetVersion = max(
     </p>
 </footer>
 
-<script src="assets/i18n.js?v=<?= $assetVersion ?>"></script>
-<script src="assets/app.js?v=<?= $assetVersion ?>"></script>
+<script src="assets/i18n.js?v=<?= $assetVersion ?>" defer></script>
+<script src="assets/app.js?v=<?= $assetVersion ?>" defer></script>
 </body>
 </html>

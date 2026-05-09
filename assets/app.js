@@ -942,7 +942,21 @@ let currentFacultyText = '';
 let currentLectures = [];
 let currentTab = 'structured';
 
+// Click handling for the faculty list. Uses event delegation so it works
+// whether the LIs were rendered server-side (default — see index.php) or
+// re-rendered by JS on language switch / fallback.
+facultyListEl.addEventListener('click', (e) => {
+    const li = e.target.closest('li[data-slug]');
+    if (!li || !facultyListEl.contains(li)) return;
+    loadFaculty(li.dataset.slug, li.dataset.kind || 'additional_pdf');
+});
+
 async function loadFaculties() {
+    // Skip the round-trip if PHP already rendered the list (the common case;
+    // saves an HTTP request and avoids any layout shift).
+    if (facultyListEl.dataset.ssr === '1' && facultyListEl.children.length > 0) {
+        return;
+    }
     try {
         const r = await fetch('api/faculties.php');
         const data = await r.json();
@@ -997,7 +1011,6 @@ function renderFacultyList(items) {
             meta.textContent = t('faculties.cell.detail', {lectures: structured, pages: (f.page_count || '?'), date: date});
             li.appendChild(name);
             li.appendChild(meta);
-            li.addEventListener('click', () => loadFaculty(f.faculty_slug, kind));
             facultyListEl.appendChild(li);
         }
     }
