@@ -17,6 +17,10 @@ $updatedDate = '2026-05-08';
 <meta name="description" content="GTU ცხრილის გამოყენების წესები. Terms of use for the GTU ცხრილი website and Chrome extension.">
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="https://gtu.cortexgrid.ge/terms.php">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="128x128" href="/assets/favicon-128.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="assets/style.css?v=<?= $assetVersion ?>">
 <link rel="stylesheet" href="assets/legal.css?v=<?= $assetVersion ?>">
 </head>

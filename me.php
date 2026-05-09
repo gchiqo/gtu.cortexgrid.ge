@@ -277,6 +277,10 @@ $midtermAgg = aggregate_midterm_exams($enrichedCourses);
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= $payload && !empty($payload['name']) ? h($payload['name']) . ' — ' : '' ?><span data-i18n="me.title">ჩემი ცხრილი</span> | GTU</title>
 <meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="128x128" href="/assets/favicon-128.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="assets/style.css?v=<?= $assetVersion ?>">
 <link rel="stylesheet" href="assets/me.css?v=<?= $assetVersion ?>">
 </head>

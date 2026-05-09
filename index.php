@@ -30,9 +30,11 @@ $assetVersion = max(
 <link rel="alternate" hreflang="ka" href="https://gtu.cortexgrid.ge/">
 <link rel="alternate" hreflang="en" href="https://gtu.cortexgrid.ge/?lang=en">
 <link rel="alternate" hreflang="x-default" href="https://gtu.cortexgrid.ge/">
-<link rel="icon" type="image/png" sizes="32x32" href="extension/icons/icon-32.png">
-<link rel="icon" type="image/png" sizes="128x128" href="extension/icons/icon-128.png">
-<link rel="apple-touch-icon" sizes="128x128" href="extension/icons/icon-128.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="128x128" href="/assets/favicon-128.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="GTU ცხრილი">
