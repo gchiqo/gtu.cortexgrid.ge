@@ -14,11 +14,42 @@ require_once __DIR__ . '/lib/faculty.php';
  * The payload only ever lives in the URL — nothing is stored server-side.
  */
 
-$encoded = (string)($_GET['d'] ?? '');
 $payload = null;
 $decodeError = null;
 
-if ($encoded !== '') {
+// Three ways to receive the payload, in order of preference:
+//  1. GET['c'] — array of "Subject|Teacher" strings. Used by /builder.php
+//     so the URL stays human-readable and shareable.
+//     Example: /me.php?c[]=ხელოვნური ინტელექტი|ცხომელიძე&c[]=...
+//  2. GET['d'] — base64-of-JSON. Used by the Chrome extension because it
+//     opens this page via window.open() and sends the full vici card.
+//  3. POST['payload'] — raw JSON. Internal escape hatch for long payloads.
+//  4. Nothing — render the empty state.
+$encoded      = (string)($_GET['d'] ?? '');
+$pairsParam   = $_GET['c'] ?? null;
+$postPayload  = isset($_POST['payload']) ? (string)$_POST['payload'] : '';
+
+if (is_array($pairsParam) && $pairsParam) {
+    $courses = [];
+    foreach ($pairsParam as $cs) {
+        $parts = explode('|', (string)$cs, 2);
+        $subject = trim($parts[0] ?? '');
+        $teacher = trim($parts[1] ?? '');
+        if ($subject !== '' && $teacher !== '') {
+            $courses[] = [
+                'subject'   => $subject,
+                'subjectEn' => '',
+                'teacher'   => $teacher,
+                'teacherEn' => '',
+            ];
+        }
+    }
+    if ($courses) {
+        $payload = ['name' => '', 'school' => '', 'courses' => $courses];
+    } else {
+        $decodeError = 'empty courses';
+    }
+} elseif ($encoded !== '') {
     $raw = base64_decode($encoded, true);
     if ($raw === false) {
         $decodeError = 'invalid base64';
@@ -28,6 +59,12 @@ if ($encoded !== '') {
             $decodeError = 'malformed payload';
             $payload = null;
         }
+    }
+} elseif ($postPayload !== '') {
+    $payload = json_decode($postPayload, true);
+    if (!is_array($payload) || !isset($payload['courses']) || !is_array($payload['courses'])) {
+        $decodeError = 'malformed payload';
+        $payload = null;
     }
 }
 

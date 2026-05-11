@@ -130,6 +130,9 @@ $assetVersion = max(
             (<a href="<?= htmlspecialchars($lastSource['url']) ?>" target="_blank" rel="noopener" data-i18n="stats.source">წყარო</a>)
         <?php endif; ?>
     </p>
+    <p class="builder-cta-wrap">
+        <a href="/builder.php" class="builder-cta" data-i18n="builder.cta">📅 ააწყვე ცხრილი</a>
+    </p>
 </header>
 
 <main>

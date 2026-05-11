@@ -82,28 +82,35 @@ function significant_words(string $s): array {
  * Looser-than-strict subject match: returns true if a row subject shares
  * enough significant words with any of the card's subject candidates that
  * we're confident it's the same course despite small wording differences
- * (e.g. "სისტემა Hadoop" in the card vs "ეკოსისტემა Hadoop" in leqtori).
+ * (e.g. "სისტემა Hadoop" in the card vs "ეკოსისტემა Hadoop" in leqtori)
+ * OR partial PDF-parser output (e.g. "ხელოვნური ინტელექტის" in the row
+ * when the card says "ხელოვნური ინტელექტის საფუძვლები").
  *
  * Uses substring tests rather than equality so a row's "ეკოსისტემა"
  * still satisfies the card's "სისტემა" (it embeds it). The threshold
- * combination — ≥3 matches AND ≥50% of card words — was chosen so:
- *   - Bichnigauri's true Hadoop row scores 5/6 → matches
- *   - Lili's "Fundamentals of Database Systems" scores 1/5 (just "data")
- *     → does NOT match
- *   - Bichnigauri's other course "Big Data Fundamentals" scores 1/5 → does
- *     NOT match (we don't pull her unrelated lectures into this course)
+ * combination — ≥2 matches AND ≥65% of card words — was chosen so:
+ *   - Bichnigauri's true Hadoop row scores 6/6 → matches
+ *   - Tskhomelidze's "ხელოვნური ინტელექტის" PDF row (3rd word lost in
+ *     parsing) scores 2/3 ≈ 67% → matches
+ *   - Lili's "Fundamentals of Database Systems" scores 0/6 against the
+ *     Hadoop card → does NOT match
+ *   - Bichnigauri's other course "Big Data Fundamentals" scores 1/3 against
+ *     the AI card → does NOT match
+ *
+ * The 65% floor (not 50%) is what keeps 2-of-4 = 50% partial overlaps out;
+ * 2-of-3 = 67% is the lowest passing ratio.
  */
 function subject_overlaps_enough(string $rowSubject, array $cardSubjectCandidates): bool {
     $rowLower = mb_strtolower($rowSubject, 'UTF-8');
     foreach ($cardSubjectCandidates as $cs) {
         $cardWords = significant_words($cs);
         $n = count($cardWords);
-        if ($n < 3) continue; // single-word subjects can't be fuzzy-matched safely
+        if ($n < 3) continue; // ≤2-word subjects can't be fuzzy-matched safely
         $matched = 0;
         foreach ($cardWords as $w) {
             if (mb_stripos($rowLower, $w) !== false) $matched++;
         }
-        if ($matched >= 3 && ($matched / $n) >= 0.5) return true;
+        if ($matched >= 2 && ($matched / $n) >= 0.65) return true;
     }
     return false;
 }

@@ -382,6 +382,24 @@ a:hover { text-decoration: underline; }
 .all-card .all-card-loading { color: var(--muted); font-style: italic; }
 .all-card .all-card-error { color: #ff8e8e; }
 
+.builder-cta-wrap { margin: 8px 0 0; }
+.builder-cta {
+    display: inline-block;
+    padding: 7px 14px;
+    background: rgba(139, 92, 246, 0.12);
+    color: #c4b5fd;
+    border: 1px solid rgba(139, 92, 246, 0.5);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+.builder-cta:hover {
+    background: rgba(139, 92, 246, 0.22);
+    color: #ddd6fe;
+    text-decoration: none;
+}
+
 footer { padding-top: 32px; padding-bottom: 32px; }
 
 /* ──────────────────────────────────────────────────────────────────────
