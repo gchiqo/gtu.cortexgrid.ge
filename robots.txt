@@ -1,10 +1,13 @@
 User-agent: *
 Allow: /
+Allow: /me.php
 Disallow: /api/
-Disallow: /me.php
 Disallow: /lib/
 Disallow: /vendor/
 Disallow: /scripts/
+# Only block the personal extension URLs (they encode the student's name).
+# Builder-built URLs use ?c[]= and are public — fine to index.
 Disallow: /*?d=
+Disallow: /me.php?d=*
 
 Sitemap: https://gtu.cortexgrid.ge/sitemap.xml

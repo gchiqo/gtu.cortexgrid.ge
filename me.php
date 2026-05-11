@@ -306,14 +306,65 @@ $weeklyHasAny = false;
 foreach ($weeklyGrid as $row) foreach ($row as $cell) if ($cell) { $weeklyHasAny = true; break 2; }
 
 $midtermAgg = aggregate_midterm_exams($enrichedCourses);
+
+/* ─── Page meta ───
+ * - Pages opened via the Chrome extension carry a real student name in the
+ *   payload. Those stay `noindex,nofollow` — they are personal.
+ * - Pages opened via /builder.php (or any `?c[]=` URL) carry only public
+ *   subject/teacher strings, which is the same data leqtori.gtu.ge already
+ *   publishes. We let robots index those so students searching for "GTU
+ *   ცხრილი ხელოვნური ინტელექტი" can land here.                            */
+$hasPersonal = $payload && !empty($payload['name']);
+$courseSubjects = [];
+if ($payload && !empty($payload['courses'])) {
+    foreach ($payload['courses'] as $c) {
+        $s = trim((string)($c['subject'] ?? ''));
+        if ($s !== '') $courseSubjects[] = $s;
+    }
+}
+$subjectPreview = implode(', ', array_slice($courseSubjects, 0, 3));
+if (count($courseSubjects) > 3) $subjectPreview .= '…';
+
+if ($hasPersonal) {
+    $pageTitle = trim($payload['name']) . ' — ჩემი ცხრილი | GTU ცხრილი';
+    $pageDesc  = '';
+    $robots    = 'noindex,nofollow';
+} elseif ($courseSubjects) {
+    $pageTitle = ($subjectPreview ? $subjectPreview . ' — ' : '') . 'სასწავლო ცხრილი | GTU ცხრილი';
+    $descSubjects = implode(', ', array_slice($courseSubjects, 0, 6));
+    $pageDesc  = 'GTU სასწავლო ცხრილი: ' . $descSubjects
+               . ' — ლექციები, საათები და აუდიტორიები. GTU class schedule for: '
+               . $descSubjects . ' — lectures, times and rooms.';
+    $robots    = 'index,follow,max-image-preview:large';
+} else {
+    $pageTitle = 'ჩემი ცხრილი | GTU ცხრილი';
+    $pageDesc  = 'GTU პერსონალური სასწავლო ცხრილი — ააწყვე საგანი + პედაგოგი წყვილების მიხედვით. Build a personal GTU class schedule from subject + teacher pairs.';
+    $robots    = 'noindex,nofollow';
+}
+
+$canonicalUrl = 'https://gtu.cortexgrid.ge' . ($_SERVER['REQUEST_URI'] ?? '/me.php');
 ?>
 <!DOCTYPE html>
 <html lang="ka">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title><?= $payload && !empty($payload['name']) ? h($payload['name']) . ' — ' : '' ?><span data-i18n="me.title">ჩემი ცხრილი</span> | GTU</title>
-<meta name="robots" content="noindex,nofollow">
+<title><?= h($pageTitle) ?></title>
+<?php if ($pageDesc): ?>
+<meta name="description" content="<?= h($pageDesc) ?>">
+<?php endif; ?>
+<meta name="robots" content="<?= h($robots) ?>">
+<link rel="canonical" href="<?= h($canonicalUrl) ?>">
+<?php if (!$hasPersonal && $courseSubjects): /* Open Graph only for indexable pages */ ?>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GTU ცხრილი">
+<meta property="og:title" content="<?= h($pageTitle) ?>">
+<meta property="og:description" content="<?= h($pageDesc) ?>">
+<meta property="og:url" content="<?= h($canonicalUrl) ?>">
+<meta property="og:image" content="https://gtu.cortexgrid.ge/assets/og-image.png">
+<meta property="og:locale" content="ka_GE">
+<meta name="twitter:card" content="summary_large_image">
+<?php endif; ?>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="128x128" href="/assets/favicon-128.png">

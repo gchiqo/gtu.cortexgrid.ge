@@ -11,6 +11,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://gtu.cortexgrid.ge/"/>
   </url>
   <url>
+    <loc>https://gtu.cortexgrid.ge/builder.php</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://gtu.cortexgrid.ge/privacy.php</loc>
     <lastmod>2026-05-08</lastmod>
     <changefreq>yearly</changefreq>
