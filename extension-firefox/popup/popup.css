@@ -1,0 +1,142 @@
+* { box-sizing: border-box; }
+html, body {
+    margin: 0; padding: 0;
+    /* Desktop popup uses 360 px exactly. Firefox Android opens the popup
+       full-screen — `max-width: 100vw` ensures we never overflow the phone
+       viewport (narrow phones stay readable; wider phones get a 360 px
+       column, which is the popup's design width anyway). */
+    width: 360px;
+    max-width: 100vw;
+    background: #0f1115;
+    color: #e7e9ee;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 13px;
+}
+header { padding: 14px 14px 6px; position: relative; }
+.lang-switcher {
+    position: absolute;
+    top: 10px; right: 12px;
+    display: inline-flex;
+    background: #181b22;
+    border: 1px solid #2a2f39;
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 5;
+}
+.lang-switcher button {
+    background: transparent;
+    color: #8a91a0;
+    border: 0;
+    padding: 3px 8px;
+    font: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-right: 1px solid #2a2f39;
+}
+.lang-switcher button:last-child { border-right: 0; }
+.lang-switcher button:hover { color: #e7e9ee; background: #20242c; }
+.lang-switcher button[aria-pressed="true"] {
+    background: #6d28d9;
+    color: white;
+}
+h1 { margin: 0 0 4px; font-size: 16px; }
+.muted { color: #8a91a0; font-size: 11px; }
+.error { color: #ff7b6b; }
+section { padding: 10px 14px; border-top: 1px solid #2a2f39; }
+section.hidden, .hidden { display: none; }
+
+.kv { display: flex; justify-content: space-between; padding: 4px 0; gap: 8px; }
+.kv .k { color: #8a91a0; flex-shrink: 0; }
+.kv .v { font-weight: 600; text-align: right; }
+
+#found h3 { margin: 12px 0 6px; font-size: 12px; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.5px; }
+.courses { list-style: none; padding: 0; margin: 0 0 8px; }
+.courses li {
+    padding: 6px 8px;
+    background: #181b22;
+    border: 1px solid #2a2f39;
+    border-left: 2px solid #8b5cf6;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+.courses .subject { font-weight: 600; font-size: 12px; }
+.courses .meta { color: #8a91a0; font-size: 11px; margin-top: 2px; }
+.courses .course-stats { color: #6ea8ff; font-weight: 500; }
+.courses .next-exam { color: #ff7b6b; font-weight: 500; }
+
+.courses .course-lectures {
+    margin-top: 6px;
+    padding-top: 5px;
+    border-top: 1px dashed rgba(139, 92, 246, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.courses .lec-line {
+    color: #e7e9ee;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+    padding-left: 14px;
+    position: relative;
+}
+.courses .lec-line::before {
+    content: '🗓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 9px;
+    opacity: 0.55;
+}
+
+.small { font-size: 11px; }
+.cant-find {
+    margin-top: 10px;
+    padding: 8px 10px;
+    background: #181b22;
+    border: 1px dashed #2a2f39;
+    border-radius: 6px;
+    text-align: center;
+}
+.cant-find a { color: #6ea8ff; }
+
+.primary-btn {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 12px;
+    text-align: center;
+    background: #181b22;
+    color: #e7e9ee;
+    text-decoration: none;
+    border: 1px solid #2a2f39;
+    border-left: 3px solid #ffb86c;
+    border-radius: 8px;
+    font-weight: 600;
+}
+.primary-btn:hover { background: #20242c; }
+
+.raw-details { padding: 10px 14px; border-top: 1px solid #2a2f39; }
+.raw-details summary { cursor: pointer; color: #8a91a0; font-size: 11px; }
+.raw-details pre, section pre {
+    background: #181b22;
+    border: 1px solid #2a2f39;
+    border-radius: 6px;
+    padding: 8px;
+    margin: 6px 0 0;
+    max-height: 220px;
+    overflow: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+footer {
+    padding: 8px 14px;
+    border-top: 1px solid #2a2f39;
+    text-align: center;
+    font-size: 11px;
+}
+footer a { color: #6ea8ff; text-decoration: none; }
