@@ -178,6 +178,12 @@ That's 00:00, 05:00, 10:00, 15:00, 20:00 UTC. A full run touches ~30 sources, pa
 
 ---
 
+## Acknowledgements
+
+The idea for this project was suggested by **ლუკა ცხომელიძე (Luka Tskhomelidze)**, lecturer of *ხელოვნური ინტელექტის საფუძვლები / Fundamentals of Artificial Intelligence* at GTU — who encouraged building something practical like this. Thank you.
+
+---
+
 ## Built with
 
 This whole project — backend, frontend, extension, scraper, store listing, SEO, legal pages — was built collaboratively with **Claude Code** (Opus 4.7, 1M context). Every prompt I used is in [`PROMPTS.md`](PROMPTS.md).

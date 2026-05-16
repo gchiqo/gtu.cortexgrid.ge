@@ -182,7 +182,7 @@ const I18N_DICT = {
         'me.footer':                  'მონაცემები მოდის leqtori.gtu.ge-ის ჩვენ მიერ სკანირებულ ვერსიიდან. პერსონალური ინფო (შენი card) მხოლოდ ბრაუზერში რჩება — სერვერზე არაფერი არ ინახება.',
 
         // Footer
-        'footer.html':              'მონაცემები: <a href="https://leqtori.gtu.ge/" target="_blank" rel="noopener">leqtori.gtu.ge</a>. ეს არ არის უნივერსიტეტის ოფიციალური საიტი — გადაამოწმე კრიტიკული ცვლილებები. <a href="/privacy.php">კონფიდენციალურობა</a> · <a href="/terms.php">წესები</a> · <a href="mailto:voidpoko@gmail.com">voidpoko@gmail.com</a>',
+        'footer.html':              'მონაცემები: <a href="https://leqtori.gtu.ge/" target="_blank" rel="noopener">leqtori.gtu.ge</a>. ეს არ არის უნივერსიტეტის ოფიციალური საიტი — გადაამოწმე კრიტიკული ცვლილებები.<br>იდეა შემოგვთავაზა <strong>ლუკა ცხომელიძემ</strong> (ხელოვნური ინტელექტის საფუძვლების ლექტორი) — მადლობა. <a href="/privacy.php">კონფიდენციალურობა</a> · <a href="/terms.php">წესები</a> · <a href="mailto:voidpoko@gmail.com">voidpoko@gmail.com</a>',
 
         // Days
         'day.1': 'ორშ.', 'day.2': 'სამშ.', 'day.3': 'ოთხშ.', 'day.4': 'ხუთშ.',
@@ -341,7 +341,7 @@ const I18N_DICT = {
         'me.course.credits':          '{n} credits',
         'me.footer':                  'Data comes from our scrape of leqtori.gtu.ge. Personal info (your card) stays in your browser only — nothing is stored on the server.',
 
-        'footer.html':              'Data: <a href="https://leqtori.gtu.ge/" target="_blank" rel="noopener">leqtori.gtu.ge</a>. This is not the official university site — verify critical changes there. <a href="/privacy.php">Privacy</a> · <a href="/terms.php">Terms</a> · <a href="mailto:voidpoko@gmail.com">voidpoko@gmail.com</a>',
+        'footer.html':              'Data: <a href="https://leqtori.gtu.ge/" target="_blank" rel="noopener">leqtori.gtu.ge</a>. This is not the official university site — verify critical changes there.<br>Idea suggested by <strong>Luka Tskhomelidze</strong> (lecturer, Fundamentals of Artificial Intelligence) — thank you. <a href="/privacy.php">Privacy</a> · <a href="/terms.php">Terms</a> · <a href="mailto:voidpoko@gmail.com">voidpoko@gmail.com</a>',
 
         'day.1': 'Mon', 'day.2': 'Tue', 'day.3': 'Wed', 'day.4': 'Thu',
         'day.5': 'Fri', 'day.6': 'Sat', 'day.7': 'Sun',
