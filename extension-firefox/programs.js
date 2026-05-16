@@ -65,10 +65,20 @@
     /** Flatten modules→groups→books and classify each subject. */
     function classify(prog) {
         const books = [];
+        let groupOrder = 0;
         for (const mod of (prog.modules || [])) {
             for (const g of (mod.groups || [])) {
+                const go = groupOrder++;
                 for (const b of (g.books || [])) {
-                    books.push({ entry: b, moduleName: mod.name, groupName: g.name });
+                    books.push({
+                        entry: b,
+                        moduleName: mod.name,
+                        moduleIndex: mod.index || '',
+                        groupName: g.name,
+                        groupId: g.id,
+                        groupOrder: go,
+                        groupCreditLimit: g.creditLimit ?? null,
+                    });
                 }
             }
         }
@@ -109,6 +119,11 @@
                 credit:  e.book ? (e.book.credit ?? null) : null,
                 semesters: Array.isArray(e.semesters) ? e.semesters : [],
                 module:  x.moduleName,
+                moduleIndex: x.moduleIndex,
+                group:   x.groupName,
+                groupId: x.groupId,
+                groupOrder: x.groupOrder,
+                groupCreditLimit: x.groupCreditLimit,
             };
             if (e.hasPassed) { passed.push(meta); continue; }
 
@@ -122,8 +137,43 @@
         }
 
         const byName = (a, b) => (a.name || '').localeCompare(b.name || '', 'ka');
-        passed.sort(byName); choosable.sort(byName); blocked.sort(byName);
-        return { passed, choosable, blocked, total: books.length };
+        // Earliest recommended semester (first entry in semesters[]), or 99 if none.
+        const minSem = (m) => {
+            const ns = (m.semesters || []).map(s => parseInt(s, 10)).filter(n => !isNaN(n));
+            return ns.length ? Math.min(...ns) : 99;
+        };
+        const bySemThenName = (a, b) => (minSem(a) - minSem(b)) || byName(a, b);
+
+        passed.sort(bySemThenName);
+        blocked.sort(bySemThenName);
+
+        // Choosable: GROUP by the program's requirement bucket (group), keep
+        // the program's own group order, and sort subjects inside each group
+        // by recommended semester then name. `choosableGrouped` is a flat list
+        // with {__group:true,…} divider rows so the existing collapsible
+        // section() renderer can lay it out without special-casing.
+        const groupsMap = new Map();
+        for (const m of choosable) {
+            if (!groupsMap.has(m.groupOrder)) {
+                groupsMap.set(m.groupOrder, {
+                    order: m.groupOrder,
+                    name: m.group || '—',
+                    moduleIndex: m.moduleIndex,
+                    creditLimit: m.groupCreditLimit,
+                    items: [],
+                });
+            }
+            groupsMap.get(m.groupOrder).items.push(m);
+        }
+        const orderedGroups = Array.from(groupsMap.values())
+            .sort((a, b) => a.order - b.order);
+        for (const grp of orderedGroups) grp.items.sort(bySemThenName);
+
+        return {
+            passed, choosable, blocked,
+            choosableGroups: orderedGroups,   // [{name,moduleIndex,creditLimit,items[]}]
+            total: books.length,
+        };
     }
 
     let _data = null;     // cached classify() result
@@ -171,8 +221,79 @@
         return n;
     }
 
-    function section(title, subtitle, items, color, renderItem, defaultOpen) {
+    // The panel + button live inside a Shadow DOM so vici.gtu.ge's own theme
+    // (especially its LIGHT theme, which uses `!important` rules) cannot
+    // override our colors. Page stylesheets do not cross the shadow boundary;
+    // `:host{all:initial}` also blocks inherited color/font from leaking in.
+    let _shadow = null;
+    function shadow() {
+        if (_shadow) return _shadow;
+        const host = document.createElement('div');
+        host.id = 'gtu-programs-host';
+        host.style.setProperty('all', 'initial', 'important');
+        _shadow = host.attachShadow({ mode: 'open' });
+        const st = document.createElement('style');
+        st.textContent =
+            ':host{all:initial;}' +
+            '*{box-sizing:border-box;margin:0;}' +
+            ':host{color:' + C.text + ';color-scheme:dark;' +
+            'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;}';
+        _shadow.appendChild(st);
+        document.body.appendChild(host);
+        return _shadow;
+    }
+    function shadowQ(sel) { return _shadow ? _shadow.querySelector(sel) : null; }
+
+    function copyText(s) {
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                return navigator.clipboard.writeText(s);
+            }
+        } catch {}
+        // Fallback for older engines / non-secure contexts.
+        try {
+            const ta = document.createElement('textarea');
+            ta.value = s;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            ta.remove();
+        } catch {}
+        return Promise.resolve();
+    }
+
+    /** A bookId badge that copies the id to the clipboard when clicked. */
+    function copyableId(id, color) {
+        const badge = el('button', {
+            color: color || C.accent, fontWeight: '700',
+            fontVariantNumeric: 'tabular-nums',
+            background: 'rgba(255,255,255,0.04)',
+            border: `1px solid ${C.border}`,
+            borderRadius: '5px', padding: '2px 8px', marginRight: '8px',
+            cursor: 'pointer', fontSize: '13px', lineHeight: '1.4',
+            fontFamily: 'inherit',
+        }, String(id));
+        badge.type = 'button';
+        badge.title = 'დააკოპირე ID / copy ID';
+        badge.addEventListener('click', (e) => {
+            e.stopPropagation();
+            copyText(String(id));
+            const old = badge.textContent;
+            badge.textContent = '✓ ' + old;
+            badge.style.color = C.green;
+            setTimeout(() => {
+                badge.textContent = old;
+                badge.style.color = color || C.accent;
+            }, 1100);
+        });
+        return badge;
+    }
+
+    function section(title, subtitle, items, color, renderItem, defaultOpen, countOverride, customBody) {
         const wrap = el('section', { marginBottom: '10px' });
+        const count = (countOverride != null) ? countOverride : items.length;
 
         // Clickable header row → toggles the body (collapsible dropdown).
         const h = el('div', {
@@ -190,11 +311,18 @@
             fontSize: '14px', fontWeight: '700', color,
         }, title));
         h.appendChild(el('span', { fontSize: '12px', color: C.muted },
-            `${subtitle} · ${items.length}`));
+            `${subtitle} · ${count}`));
         wrap.appendChild(h);
 
         const body = el('div', { paddingTop: '6px' });
-        if (!items.length) {
+        if (typeof customBody === 'function') {
+            if (count === 0) {
+                body.appendChild(el('div', { color: C.muted, fontSize: '12px',
+                    fontStyle: 'italic', padding: '4px 0' }, '—'));
+            } else {
+                body.appendChild(customBody());
+            }
+        } else if (!items.length) {
             body.appendChild(el('div', { color: C.muted, fontSize: '12px',
                 fontStyle: 'italic', padding: '4px 0' }, '—'));
         } else {
@@ -215,36 +343,109 @@
         return wrap;
     }
 
-    function subjectRow(meta, extra, color) {
-        const li = el('li', {
-            background: C.panel2, border: `1px solid ${C.border}`,
-            borderRadius: '6px', padding: '8px 10px', marginBottom: '6px',
-        });
-        // Primary line: "<id>  <KA name>" — the bookId is what the user wants
-        // visible (e.g. "6103 საინჟინრო მათემატიკა 1.1").
-        const top = el('div', { fontWeight: '600', fontSize: '13px',
-            color: C.text, wordBreak: 'break-word' });
-        top.appendChild(el('span', {
-            color: color || C.accent, fontWeight: '700',
-            fontVariantNumeric: 'tabular-nums', marginRight: '6px',
-        }, String(meta.bookId)));
-        top.appendChild(document.createTextNode(meta.name));
-        li.appendChild(top);
 
-        // Secondary line: English name, then code · credits · semester.
-        const sub = [];
-        if (meta.nameEn && meta.nameEn !== meta.name) sub.push(meta.nameEn);
-        const bits = [];
-        if (meta.code) bits.push(meta.code);
-        if (meta.credit != null) bits.push(meta.credit + ' cr');
-        if (meta.semesters && meta.semesters.length) bits.push('სემ. ' + meta.semesters.join(','));
-        if (bits.length) sub.push(bits.join(' · '));
-        if (sub.length) {
-            li.appendChild(el('div', { fontSize: '11px', color: C.muted,
-                marginTop: '2px', wordBreak: 'break-word' }, sub.join('  —  ')));
+    /** Category heading shown above each table (div, not <li>). */
+    function groupHeader(g, color) {
+        const d = el('div', {
+            display: 'flex', alignItems: 'baseline', gap: '6px',
+            flexWrap: 'wrap', margin: '14px 0 6px',
+        });
+        if (g.moduleIndex) {
+            d.appendChild(el('span', { color: C.muted, fontWeight: '600',
+                fontSize: '12px' }, g.moduleIndex + ' ·'));
         }
-        if (extra) li.appendChild(extra);
-        return li;
+        d.appendChild(el('span', { fontSize: '13px', fontWeight: '700',
+            color: color || C.green }, g.name));
+        const meta = [];
+        if (g.creditLimit != null) meta.push(g.creditLimit + ' კრ');
+        meta.push((g.items ? g.items.length : g.count) + ' საგანი');
+        d.appendChild(el('span', { color: C.muted, fontSize: '11px' },
+            '— ' + meta.join(' · ')));
+        return d;
+    }
+
+    /**
+     * Render a list of subjects as a real table with columns:
+     *   ID · საგანი · კოდი · ECTS · სემ.  (+ წინაპირობა when opts.why).
+     * `color` tints the ID badge / header underline per status.
+     */
+    function subjectTable(items, color, opts) {
+        opts = opts || {};
+        const table = el('table', {
+            width: '100%', borderCollapse: 'collapse',
+            fontSize: '13px', tableLayout: 'auto',
+        });
+
+        const cols = ['ID', 'საგანი', 'კოდი', 'ECTS', 'სემ.'];
+        if (opts.why) cols.push('წინაპირობა');
+
+        const thead = el('thead');
+        const htr = el('tr');
+        cols.forEach((c, i) => {
+            htr.appendChild(el('th', {
+                textAlign: i <= 1 || (opts.why && i === cols.length - 1)
+                    ? 'left' : 'center',
+                padding: '6px 8px', fontSize: '11px', fontWeight: '700',
+                color: C.muted, textTransform: 'uppercase',
+                letterSpacing: '0.4px',
+                borderBottom: `2px solid ${color || C.border}`,
+                whiteSpace: 'nowrap',
+            }, c));
+        });
+        thead.appendChild(htr);
+        table.appendChild(thead);
+
+        const tbody = el('tbody');
+        items.forEach((m, idx) => {
+            const tr = el('tr', {
+                background: idx % 2 ? 'rgba(255,255,255,0.02)' : 'transparent',
+            });
+            const td = (style) => {
+                const c = el('td', Object.assign({
+                    padding: '7px 8px', verticalAlign: 'top',
+                    borderBottom: `1px solid ${C.border}`,
+                }, style || {}));
+                tr.appendChild(c);
+                return c;
+            };
+
+            // ID — copyable badge.
+            td({ whiteSpace: 'nowrap' }).appendChild(copyableId(m.bookId, color));
+
+            // Name — KA bold, EN muted under it.
+            const nameCell = td({ wordBreak: 'break-word', minWidth: '220px' });
+            nameCell.appendChild(el('div', {
+                fontWeight: '600', color: C.text, fontSize: '14px',
+                lineHeight: '1.35',
+            }, m.name));
+            if (m.nameEn && m.nameEn !== m.name) {
+                nameCell.appendChild(el('div', {
+                    fontSize: '11px', color: C.muted, marginTop: '1px',
+                }, m.nameEn));
+            }
+
+            // Code · ECTS · Semester.
+            td({ textAlign: 'center', whiteSpace: 'nowrap', color: C.muted,
+                fontVariantNumeric: 'tabular-nums' }).textContent = m.code || '—';
+            td({ textAlign: 'center', whiteSpace: 'nowrap',
+                fontVariantNumeric: 'tabular-nums' }).textContent =
+                (m.credit != null ? m.credit : '—');
+            td({ textAlign: 'center', whiteSpace: 'nowrap', color: C.muted,
+                fontVariantNumeric: 'tabular-nums' }).textContent =
+                (m.semesters && m.semesters.length ? m.semesters.join(',') : '—');
+
+            // Blocked: which prerequisite is still missing.
+            if (opts.why) {
+                const w = td({ color: C.red, fontSize: '11px',
+                    wordBreak: 'break-word' });
+                w.textContent = (m.missing || [])
+                    .map(p => '[' + p.id + '] ' + p.name).join(' · ');
+            }
+
+            tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        return table;
     }
 
     function buildPanel(data) {
@@ -259,10 +460,10 @@
         });
 
         const box = el('div', {
-            background: C.bg, color: C.text, marginTop: '4vh',
-            width: 'min(560px, 94vw)', maxHeight: '88vh', overflowY: 'auto',
+            background: C.bg, color: C.text, marginTop: '3vh',
+            width: 'min(900px, 96vw)', maxHeight: '94vh', overflowY: 'auto',
             border: `1px solid ${C.border}`, borderRadius: '10px',
-            padding: '16px 18px',
+            padding: '20px 24px',
             fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
             boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
         });
@@ -280,37 +481,42 @@
         head.appendChild(close);
         box.appendChild(head);
 
-        box.appendChild(el('p', { margin: '0 0 12px', fontSize: '12px',
+        box.appendChild(el('p', { margin: '0 0 14px', fontSize: '12px',
             color: C.muted },
-            `${data.total} საგანი პროგრამაში — დახარისხებული სტატუსის მიხედვით.`));
+            `${data.total} საგანი პროგრამაში — დახარისხებული სტატუსის მიხედვით. ` +
+            `დააწექი ID-ს დასაკოპირებლად.`));
 
+        // Choosable: one TABLE per requirement group (category), with a
+        // heading above each.
         box.appendChild(section('🟢 ასარჩევი', 'Choosable now',
-            data.choosable, C.green, m => subjectRow(m, null, C.green), true));
+            null, C.green, null, true, data.choosable.length, () => {
+                const c = el('div');
+                for (const g of data.choosableGroups) {
+                    c.appendChild(groupHeader(g, C.green));
+                    c.appendChild(subjectTable(g.items, C.green));
+                }
+                return c;
+            }));
 
+        // Blocked: single table with an extra "prerequisite" column.
         box.appendChild(section('🔒 დაბლოკილი', 'Blocked by prerequisite',
-            data.blocked, C.red, m => {
-                const why = el('div', {
-                    marginTop: '4px', fontSize: '11px', color: C.red,
-                    background: 'rgba(255,123,107,0.08)',
-                    border: '1px solid rgba(255,123,107,0.3)',
-                    borderRadius: '4px', padding: '4px 6px',
-                });
-                why.appendChild(el('span', { fontWeight: '600' },
-                    'ჯერ ჩააბარე: '));
-                why.appendChild(document.createTextNode(
-                    m.missing.map(p => '[' + p.id + '] ' + p.name).join(' · ')));
-                return subjectRow(m, why, C.red);
-            }, true));
+            null, C.red, null, true, data.blocked.length, () =>
+                subjectTable(data.blocked, C.red, { why: true })));
 
+        // Passed: single table.
         box.appendChild(section('✅ გავლილი', 'Passed',
-            data.passed, C.accent, m => subjectRow(m, null, C.accent), false));
+            null, C.accent, null, false, data.passed.length, () =>
+                subjectTable(data.passed, C.accent)));
 
         overlay.appendChild(box);
-        document.body.appendChild(overlay);
+        const sr = shadow();
+        const existing = sr.querySelector('#gtu-programs-overlay');
+        if (existing) existing.remove();
+        sr.appendChild(overlay);
     }
 
     function injectButton() {
-        if (document.getElementById('gtu-programs-fab')) return;
+        if (shadowQ('#gtu-programs-fab')) return;
         const fab = el('button', {
             position: 'fixed', left: '18px', bottom: '18px', zIndex: 999999,
             padding: '10px 14px', background: C.bg, color: C.text,
@@ -338,13 +544,13 @@
             fab.textContent = prev;
             fab.disabled = false;
         });
-        document.body.appendChild(fab);
+        shadow().appendChild(fab);
     }
 
     function removeButton() {
-        const f = document.getElementById('gtu-programs-fab');
+        const f = shadowQ('#gtu-programs-fab');
         if (f) f.remove();
-        const o = document.getElementById('gtu-programs-overlay');
+        const o = shadowQ('#gtu-programs-overlay');
         if (o) o.remove();
     }
 
