@@ -2643,3 +2643,843 @@
 [2026-05-16 22:00:31] additional_pdf: stored 10, failed 0
 [2026-05-16 22:00:31] midterm_pdf: no PDFs
 [2026-05-16 22:00:31] done in 29.76s
+[2026-05-17 02:00:02] fetching homepage
+[2026-05-17 02:00:03] discovered 12 links across 2 sections
+[2026-05-17 02:00:03] teachers_html: 2 unique source(s)
+[2026-05-17 02:00:04]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9.html] fetching
+[2026-05-17 02:00:05]   fetched 8020100 bytes
+[2026-05-17 02:00:07]   parsed 10216 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-17 02:01:24]   stored 10216 (deduped 0) into lecture
+[2026-05-17 02:01:24]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-17 02:01:25]   fetched 111363 bytes
+[2026-05-17 02:01:25]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-17 02:01:25]   stored 52 (deduped 0) into lecture
+[2026-05-17 02:01:25] teachers totals: 1680 teachers, 4571 subjects, 10268 lectures
+[2026-05-17 02:01:25] additional_pdf: 10 PDF(s) to fetch
+[2026-05-17 02:01:25]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-17 02:01:25]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-17 02:01:26]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-17 02:01:27]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-17 02:01:27]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-17 02:01:27]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-17 02:01:27]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-17 02:01:27]   [additional_pdf/power] raw text only
+[2026-05-17 02:01:27]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-17 02:01:27]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-17 02:01:27]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-17 02:01:27]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-17 02:01:27]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-17 02:01:28]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-17 02:01:28]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-17 02:01:28]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-17 02:01:28]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-17 02:01:29]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-17 02:01:29]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-17 02:01:29]   [additional_pdf/transport] raw text only
+[2026-05-17 02:01:29]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-17 02:01:29]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-17 02:01:29]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-17 02:01:29]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-17 02:01:29]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-17 02:01:30]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-17 02:01:30]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-17 02:01:30]   [additional_pdf/law] raw text only
+[2026-05-17 02:01:30]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-17 02:01:31]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-17 02:01:31]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-17 02:01:32]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-17 02:01:32]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-17 02:01:32]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-17 02:01:32]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-17 02:01:32]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-17 02:01:32]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-17 02:01:33]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-17 02:01:33]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-17 02:01:33]   [additional_pdf/social] raw text only
+[2026-05-17 02:01:33] additional_pdf: stored 10, failed 0
+[2026-05-17 02:01:33] midterm_pdf: no PDFs
+[2026-05-17 02:01:33] done in 91.07s
+[2026-05-17 07:00:02] fetching homepage
+[2026-05-17 07:00:03] discovered 12 links across 2 sections
+[2026-05-17 07:00:03] teachers_html: 2 unique source(s)
+[2026-05-17 07:00:04]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9.html] fetching
+[2026-05-17 07:00:05]   fetched 8020100 bytes
+[2026-05-17 07:00:06]   parsed 10216 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-17 07:00:23]   stored 10216 (deduped 0) into lecture
+[2026-05-17 07:00:23]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-17 07:00:23]   fetched 111363 bytes
+[2026-05-17 07:00:23]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-17 07:00:23]   stored 52 (deduped 0) into lecture
+[2026-05-17 07:00:23] teachers totals: 1680 teachers, 4571 subjects, 10268 lectures
+[2026-05-17 07:00:23] additional_pdf: 10 PDF(s) to fetch
+[2026-05-17 07:00:23]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-17 07:00:24]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-17 07:00:24]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-17 07:00:25]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-17 07:00:25]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-17 07:00:25]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-17 07:00:25]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-17 07:00:26]   [additional_pdf/power] raw text only
+[2026-05-17 07:00:26]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-17 07:00:26]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-17 07:00:26]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-17 07:00:26]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-17 07:00:26]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-17 07:00:26]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-17 07:00:26]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-17 07:00:26]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-17 07:00:26]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-17 07:00:27]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-17 07:00:27]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-17 07:00:27]   [additional_pdf/transport] raw text only
+[2026-05-17 07:00:27]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-17 07:00:27]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-17 07:00:27]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-17 07:00:27]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-17 07:00:27]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-17 07:00:28]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-17 07:00:28]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-17 07:00:28]   [additional_pdf/law] raw text only
+[2026-05-17 07:00:28]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-17 07:00:29]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-17 07:00:29]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-17 07:00:29]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-17 07:00:29]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-17 07:00:30]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-17 07:00:30]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-17 07:00:30]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-17 07:00:30]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-17 07:00:30]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-17 07:00:30]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-17 07:00:30]   [additional_pdf/social] raw text only
+[2026-05-17 07:00:30] additional_pdf: stored 10, failed 0
+[2026-05-17 07:00:30] midterm_pdf: no PDFs
+[2026-05-17 07:00:30] done in 28.53s
+[2026-05-17 12:00:01] fetching homepage
+[2026-05-17 12:00:02] discovered 12 links across 2 sections
+[2026-05-17 12:00:02] teachers_html: 2 unique source(s)
+[2026-05-17 12:00:03]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9.html] fetching
+[2026-05-17 12:00:04]   fetched 8020100 bytes
+[2026-05-17 12:00:06]   parsed 10216 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-17 12:00:25]   stored 10216 (deduped 0) into lecture
+[2026-05-17 12:00:25]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-17 12:00:25]   fetched 111363 bytes
+[2026-05-17 12:00:25]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-17 12:00:25]   stored 52 (deduped 0) into lecture
+[2026-05-17 12:00:25] teachers totals: 1680 teachers, 4571 subjects, 10268 lectures
+[2026-05-17 12:00:25] additional_pdf: 10 PDF(s) to fetch
+[2026-05-17 12:00:25]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-17 12:00:26]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-17 12:00:26]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-17 12:00:27]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-17 12:00:27]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-17 12:00:27]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-17 12:00:27]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-17 12:00:27]   [additional_pdf/power] raw text only
+[2026-05-17 12:00:27]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-17 12:00:28]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-17 12:00:28]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-17 12:00:28]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-17 12:00:28]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-17 12:00:28]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-17 12:00:28]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-17 12:00:28]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-17 12:00:28]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-17 12:00:29]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-17 12:00:29]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-17 12:00:29]   [additional_pdf/transport] raw text only
+[2026-05-17 12:00:29]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-17 12:00:29]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-17 12:00:29]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-17 12:00:29]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-17 12:00:29]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-17 12:00:30]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-17 12:00:30]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-17 12:00:30]   [additional_pdf/law] raw text only
+[2026-05-17 12:00:30]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-17 12:00:31]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-17 12:00:31]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-17 12:00:31]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-17 12:00:31]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-17 12:00:32]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-17 12:00:32]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-17 12:00:32]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-17 12:00:32]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-17 12:00:32]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-17 12:00:32]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-17 12:00:32]   [additional_pdf/social] raw text only
+[2026-05-17 12:00:32] additional_pdf: stored 10, failed 0
+[2026-05-17 12:00:32] midterm_pdf: no PDFs
+[2026-05-17 12:00:32] done in 30.80s
+[2026-05-17 17:00:01] fetching homepage
+[2026-05-17 17:00:02] discovered 12 links across 2 sections
+[2026-05-17 17:00:02] teachers_html: 2 unique source(s)
+[2026-05-17 17:00:03]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9.html] fetching
+[2026-05-17 17:00:04]   fetched 8020100 bytes
+[2026-05-17 17:00:06]   parsed 10216 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-17 17:00:23]   stored 10216 (deduped 0) into lecture
+[2026-05-17 17:00:23]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-17 17:00:23]   fetched 111363 bytes
+[2026-05-17 17:00:23]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-17 17:00:24]   stored 52 (deduped 0) into lecture
+[2026-05-17 17:00:24] teachers totals: 1680 teachers, 4571 subjects, 10268 lectures
+[2026-05-17 17:00:24] additional_pdf: 10 PDF(s) to fetch
+[2026-05-17 17:00:24]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-17 17:00:24]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-17 17:00:24]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-17 17:00:25]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-17 17:00:25]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-17 17:00:25]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-17 17:00:26]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-17 17:00:26]   [additional_pdf/power] raw text only
+[2026-05-17 17:00:26]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-17 17:00:26]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-17 17:00:26]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-17 17:00:26]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-17 17:00:26]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-17 17:00:26]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-17 17:00:26]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-17 17:00:26]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-17 17:00:26]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-17 17:00:27]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-17 17:00:27]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-17 17:00:27]   [additional_pdf/transport] raw text only
+[2026-05-17 17:00:27]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-17 17:00:27]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-17 17:00:27]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-17 17:00:27]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-17 17:00:27]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-17 17:00:28]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-17 17:00:28]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-17 17:00:28]   [additional_pdf/law] raw text only
+[2026-05-17 17:00:28]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-17 17:00:29]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-17 17:00:29]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-17 17:00:30]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-17 17:00:30]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-17 17:00:30]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-17 17:00:30]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-17 17:00:30]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-17 17:00:30]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-17 17:00:31]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-17 17:00:31]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-17 17:00:31]   [additional_pdf/social] raw text only
+[2026-05-17 17:00:31] additional_pdf: stored 10, failed 0
+[2026-05-17 17:00:31] midterm_pdf: no PDFs
+[2026-05-17 17:00:31] done in 29.77s
+[2026-05-17 22:00:01] fetching homepage
+[2026-05-17 22:00:02] discovered 12 links across 2 sections
+[2026-05-17 22:00:02] teachers_html: 2 unique source(s)
+[2026-05-17 22:00:03]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9.html] fetching
+[2026-05-17 22:00:04]   fetched 8020100 bytes
+[2026-05-17 22:00:07]   parsed 10216 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-17 22:00:27]   stored 10216 (deduped 0) into lecture
+[2026-05-17 22:00:27]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-17 22:00:27]   fetched 111363 bytes
+[2026-05-17 22:00:27]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-17 22:00:28]   stored 52 (deduped 0) into lecture
+[2026-05-17 22:00:28] teachers totals: 1680 teachers, 4571 subjects, 10268 lectures
+[2026-05-17 22:00:28] additional_pdf: 10 PDF(s) to fetch
+[2026-05-17 22:00:28]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-17 22:00:28]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-17 22:00:28]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-17 22:00:29]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-17 22:00:29]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-17 22:00:29]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-17 22:00:30]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-17 22:00:30]   [additional_pdf/power] raw text only
+[2026-05-17 22:00:30]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-17 22:00:30]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-17 22:00:30]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-17 22:00:30]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-17 22:00:30]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-17 22:00:30]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-17 22:00:30]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-17 22:00:30]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-17 22:00:30]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-17 22:00:31]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-17 22:00:31]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-17 22:00:31]   [additional_pdf/transport] raw text only
+[2026-05-17 22:00:31]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-17 22:00:31]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-17 22:00:31]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-17 22:00:32]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-17 22:00:32]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-17 22:00:32]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-17 22:00:32]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-17 22:00:32]   [additional_pdf/law] raw text only
+[2026-05-17 22:00:32]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-17 22:00:33]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-17 22:00:33]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-17 22:00:34]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-17 22:00:34]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-17 22:00:34]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-17 22:00:34]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-17 22:00:34]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-17 22:00:34]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-17 22:00:35]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-17 22:00:35]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-17 22:00:35]   [additional_pdf/social] raw text only
+[2026-05-17 22:00:35] additional_pdf: stored 10, failed 0
+[2026-05-17 22:00:35] midterm_pdf: no PDFs
+[2026-05-17 22:00:35] done in 33.90s
+[2026-05-18 02:00:02] fetching homepage
+[2026-05-18 02:00:03] discovered 12 links across 2 sections
+[2026-05-18 02:00:03] teachers_html: 2 unique source(s)
+[2026-05-18 02:00:03]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9.html] fetching
+[2026-05-18 02:00:08]   fetched 8020100 bytes
+[2026-05-18 02:00:10]   parsed 10216 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-18 02:01:13]   stored 10216 (deduped 0) into lecture
+[2026-05-18 02:01:13]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-18 02:01:14]   fetched 111363 bytes
+[2026-05-18 02:01:14]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-18 02:01:14]   stored 52 (deduped 0) into lecture
+[2026-05-18 02:01:14] teachers totals: 1680 teachers, 4571 subjects, 10268 lectures
+[2026-05-18 02:01:14] additional_pdf: 10 PDF(s) to fetch
+[2026-05-18 02:01:14]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-18 02:01:14]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-18 02:01:15]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-18 02:01:16]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-18 02:01:16]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-18 02:01:16]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-18 02:01:16]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-18 02:01:16]   [additional_pdf/power] raw text only
+[2026-05-18 02:01:16]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-18 02:01:17]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-18 02:01:17]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-18 02:01:17]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-18 02:01:17]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-18 02:01:17]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-18 02:01:17]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-18 02:01:18]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-18 02:01:18]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-18 02:01:18]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-18 02:01:18]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-18 02:01:18]   [additional_pdf/transport] raw text only
+[2026-05-18 02:01:18]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-18 02:01:19]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-18 02:01:19]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-18 02:01:19]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-18 02:01:19]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-18 02:01:19]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-18 02:01:20]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-18 02:01:20]   [additional_pdf/law] raw text only
+[2026-05-18 02:01:20]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-18 02:01:20]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-18 02:01:21]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-18 02:01:21]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-18 02:01:21]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-18 02:01:22]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-18 02:01:22]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-18 02:01:22]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-18 02:01:22]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-18 02:01:22]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-18 02:01:22]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-18 02:01:22]   [additional_pdf/social] raw text only
+[2026-05-18 02:01:22] additional_pdf: stored 10, failed 0
+[2026-05-18 02:01:22] midterm_pdf: no PDFs
+[2026-05-18 02:01:22] done in 80.76s
+[2026-05-18 07:00:02] fetching homepage
+[2026-05-18 07:00:03] discovered 12 links across 2 sections
+[2026-05-18 07:00:03] teachers_html: 2 unique source(s)
+[2026-05-18 07:00:04]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9.html] fetching
+[2026-05-18 07:00:05]   fetched 8020100 bytes
+[2026-05-18 07:00:07]   parsed 10216 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-18 07:00:28]   stored 10216 (deduped 0) into lecture
+[2026-05-18 07:00:28]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-18 07:00:29]   fetched 111363 bytes
+[2026-05-18 07:00:29]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-18 07:00:29]   stored 52 (deduped 0) into lecture
+[2026-05-18 07:00:29] teachers totals: 1680 teachers, 4571 subjects, 10268 lectures
+[2026-05-18 07:00:29] additional_pdf: 10 PDF(s) to fetch
+[2026-05-18 07:00:29]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-18 07:00:29]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-18 07:00:30]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-18 07:00:30]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-18 07:00:30]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-18 07:00:31]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-18 07:00:31]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-18 07:00:31]   [additional_pdf/power] raw text only
+[2026-05-18 07:00:31]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-18 07:00:31]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-18 07:00:31]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-18 07:00:31]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-18 07:00:31]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-18 07:00:32]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-18 07:00:32]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-18 07:00:32]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-18 07:00:32]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-18 07:00:32]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-18 07:00:33]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-18 07:00:33]   [additional_pdf/transport] raw text only
+[2026-05-18 07:00:33]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-18 07:00:33]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-18 07:00:33]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-18 07:00:33]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-18 07:00:33]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-18 07:00:34]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-18 07:00:34]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-18 07:00:34]   [additional_pdf/law] raw text only
+[2026-05-18 07:00:34]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-18 07:00:34]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-18 07:00:35]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-18 07:00:35]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-18 07:00:35]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-18 07:00:36]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-18 07:00:36]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-18 07:00:36]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-18 07:00:36]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-18 07:00:36]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-18 07:00:36]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-18 07:00:36]   [additional_pdf/social] raw text only
+[2026-05-18 07:00:36] additional_pdf: stored 10, failed 0
+[2026-05-18 07:00:36] midterm_pdf: no PDFs
+[2026-05-18 07:00:36] done in 34.34s
+[2026-05-18 12:00:02] fetching homepage
+[2026-05-18 12:00:03] discovered 12 links across 2 sections
+[2026-05-18 12:00:03] teachers_html: 2 unique source(s)
+[2026-05-18 12:00:05]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9.html] fetching
+[2026-05-18 12:00:06]   fetched 8020100 bytes
+[2026-05-18 12:00:08]   parsed 10216 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-18 12:00:25]   stored 10216 (deduped 0) into lecture
+[2026-05-18 12:00:25]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-18 12:00:26]   fetched 111363 bytes
+[2026-05-18 12:00:26]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-18 12:00:26]   stored 52 (deduped 0) into lecture
+[2026-05-18 12:00:26] teachers totals: 1680 teachers, 4571 subjects, 10268 lectures
+[2026-05-18 12:00:26] additional_pdf: 10 PDF(s) to fetch
+[2026-05-18 12:00:26]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-18 12:00:26]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-18 12:00:26]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-18 12:00:27]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-18 12:00:27]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-18 12:00:28]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-18 12:00:28]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-18 12:00:28]   [additional_pdf/power] raw text only
+[2026-05-18 12:00:28]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-18 12:00:28]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-18 12:00:28]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-18 12:00:28]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-18 12:00:28]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-18 12:00:29]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-18 12:00:29]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-18 12:00:29]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-18 12:00:29]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-18 12:00:29]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-18 12:00:29]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-18 12:00:29]   [additional_pdf/transport] raw text only
+[2026-05-18 12:00:29]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-18 12:00:30]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-18 12:00:30]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-18 12:00:30]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-18 12:00:30]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-18 12:00:30]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-18 12:00:31]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-18 12:00:31]   [additional_pdf/law] raw text only
+[2026-05-18 12:00:31]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-18 12:00:31]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-18 12:00:31]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-18 12:00:32]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-18 12:00:32]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-18 12:00:33]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-18 12:00:33]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-18 12:00:33]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-18 12:00:33]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-18 12:00:33]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-18 12:00:33]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-18 12:00:33]   [additional_pdf/social] raw text only
+[2026-05-18 12:00:33] additional_pdf: stored 10, failed 0
+[2026-05-18 12:00:33] midterm_pdf: no PDFs
+[2026-05-18 12:00:33] done in 31.11s
+[2026-05-18 17:00:02] fetching homepage
+[2026-05-18 17:00:03] discovered 12 links across 2 sections
+[2026-05-18 17:00:03] teachers_html: 2 unique source(s)
+[2026-05-18 17:00:04]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9.html] fetching
+[2026-05-18 17:00:05]   fetched 8020100 bytes
+[2026-05-18 17:00:07]   parsed 10216 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-18 17:00:33]   stored 10216 (deduped 0) into lecture
+[2026-05-18 17:00:33]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-18 17:00:33]   fetched 111363 bytes
+[2026-05-18 17:00:33]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-18 17:00:33]   stored 52 (deduped 0) into lecture
+[2026-05-18 17:00:33] teachers totals: 1680 teachers, 4571 subjects, 10268 lectures
+[2026-05-18 17:00:33] additional_pdf: 10 PDF(s) to fetch
+[2026-05-18 17:00:33]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-18 17:00:34]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-18 17:00:34]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-18 17:00:35]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-18 17:00:35]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-18 17:00:36]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-18 17:00:36]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-18 17:00:36]   [additional_pdf/power] raw text only
+[2026-05-18 17:00:36]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-18 17:00:36]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-18 17:00:36]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-18 17:00:36]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-18 17:00:36]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-18 17:00:37]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-18 17:00:37]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-18 17:00:37]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-18 17:00:37]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-18 17:00:37]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-18 17:00:38]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-18 17:00:38]   [additional_pdf/transport] raw text only
+[2026-05-18 17:00:38]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-18 17:00:38]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-18 17:00:38]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-18 17:00:38]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-18 17:00:38]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-18 17:00:39]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-18 17:00:39]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-18 17:00:39]   [additional_pdf/law] raw text only
+[2026-05-18 17:00:39]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-18 17:00:40]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-18 17:00:40]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-18 17:00:41]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-18 17:00:41]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-18 17:00:41]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-18 17:00:41]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-18 17:00:41]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-18 17:00:41]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-18 17:00:42]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-18 17:00:42]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-18 17:00:42]   [additional_pdf/social] raw text only
+[2026-05-18 17:00:42] additional_pdf: stored 10, failed 0
+[2026-05-18 17:00:42] midterm_pdf: no PDFs
+[2026-05-18 17:00:42] done in 40.30s
+[2026-05-18 22:00:02] fetching homepage
+[2026-05-18 22:00:03] discovered 12 links across 2 sections
+[2026-05-18 22:00:03] teachers_html: 2 unique source(s)
+[2026-05-18 22:00:04]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9.html] fetching
+[2026-05-18 22:00:05]   fetched 8020100 bytes
+[2026-05-18 22:00:07]   parsed 10216 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-18 22:00:23]   stored 10216 (deduped 0) into lecture
+[2026-05-18 22:00:23]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-18 22:00:24]   fetched 111363 bytes
+[2026-05-18 22:00:24]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-18 22:00:24]   stored 52 (deduped 0) into lecture
+[2026-05-18 22:00:24] teachers totals: 1680 teachers, 4571 subjects, 10268 lectures
+[2026-05-18 22:00:24] additional_pdf: 10 PDF(s) to fetch
+[2026-05-18 22:00:24]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-18 22:00:25]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-18 22:00:25]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-18 22:00:26]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-18 22:00:26]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-18 22:00:26]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-18 22:00:26]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-18 22:00:26]   [additional_pdf/power] raw text only
+[2026-05-18 22:00:26]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-18 22:00:27]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-18 22:00:27]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-18 22:00:27]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-18 22:00:27]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-18 22:00:27]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-18 22:00:27]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-18 22:00:27]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-18 22:00:27]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-18 22:00:28]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-18 22:00:28]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-18 22:00:28]   [additional_pdf/transport] raw text only
+[2026-05-18 22:00:28]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-18 22:00:29]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-18 22:00:29]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-18 22:00:29]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-18 22:00:29]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-18 22:00:29]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-18 22:00:29]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-18 22:00:29]   [additional_pdf/law] raw text only
+[2026-05-18 22:00:29]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-18 22:00:30]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-18 22:00:30]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-18 22:00:31]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-18 22:00:31]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-18 22:00:31]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-18 22:00:31]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-18 22:00:31]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-18 22:00:31]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-18 22:00:32]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-18 22:00:32]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-18 22:00:32]   [additional_pdf/social] raw text only
+[2026-05-18 22:00:32] additional_pdf: stored 10, failed 0
+[2026-05-18 22:00:32] midterm_pdf: no PDFs
+[2026-05-18 22:00:32] done in 29.76s
+[2026-05-19 02:00:03] fetching homepage
+[2026-05-19 02:00:04] discovered 12 links across 2 sections
+[2026-05-19 02:00:04] teachers_html: 2 unique source(s)
+[2026-05-19 02:00:07]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9.html] fetching
+[2026-05-19 02:00:08]   fetched 8020100 bytes
+[2026-05-19 02:00:13]   parsed 10216 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-19 02:01:06]   stored 10216 (deduped 0) into lecture
+[2026-05-19 02:01:06]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-19 02:01:06]   fetched 111363 bytes
+[2026-05-19 02:01:06]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-19 02:01:06]   stored 52 (deduped 0) into lecture
+[2026-05-19 02:01:06] teachers totals: 1680 teachers, 4571 subjects, 10268 lectures
+[2026-05-19 02:01:06] additional_pdf: 10 PDF(s) to fetch
+[2026-05-19 02:01:06]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-19 02:01:07]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-19 02:01:07]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-19 02:01:08]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-19 02:01:08]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-19 02:01:09]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-19 02:01:09]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-19 02:01:09]   [additional_pdf/power] raw text only
+[2026-05-19 02:01:09]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-19 02:01:09]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-19 02:01:09]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-19 02:01:09]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-19 02:01:09]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-19 02:01:10]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-19 02:01:10]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-19 02:01:10]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-19 02:01:10]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-19 02:01:11]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-19 02:01:11]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-19 02:01:11]   [additional_pdf/transport] raw text only
+[2026-05-19 02:01:11]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-19 02:01:11]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-19 02:01:11]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-19 02:01:11]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-19 02:01:11]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-19 02:01:12]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-19 02:01:12]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-19 02:01:12]   [additional_pdf/law] raw text only
+[2026-05-19 02:01:12]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-19 02:01:13]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-19 02:01:13]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-19 02:01:14]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-19 02:01:14]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-19 02:01:14]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-19 02:01:14]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-19 02:01:14]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-19 02:01:14]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-19 02:01:15]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-19 02:01:15]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-19 02:01:15]   [additional_pdf/social] raw text only
+[2026-05-19 02:01:15] additional_pdf: stored 10, failed 0
+[2026-05-19 02:01:15] midterm_pdf: no PDFs
+[2026-05-19 02:01:15] done in 71.62s
+[2026-05-19 07:00:01] fetching homepage
+[2026-05-19 07:00:02] discovered 12 links across 2 sections
+[2026-05-19 07:00:02] teachers_html: 2 unique source(s)
+[2026-05-19 07:00:03]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9.html] fetching
+[2026-05-19 07:00:04]   fetched 8020100 bytes
+[2026-05-19 07:00:06]   parsed 10216 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-19 07:00:32]   stored 10216 (deduped 0) into lecture
+[2026-05-19 07:00:32]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-19 07:00:32]   fetched 111363 bytes
+[2026-05-19 07:00:32]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-19 07:00:32]   stored 52 (deduped 0) into lecture
+[2026-05-19 07:00:32] teachers totals: 1680 teachers, 4571 subjects, 10268 lectures
+[2026-05-19 07:00:32] additional_pdf: 10 PDF(s) to fetch
+[2026-05-19 07:00:32]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-19 07:00:33]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-19 07:00:33]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-19 07:00:34]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-19 07:00:34]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-19 07:00:35]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-19 07:00:35]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-19 07:00:35]   [additional_pdf/power] raw text only
+[2026-05-19 07:00:35]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-19 07:00:35]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-19 07:00:35]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-19 07:00:35]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-19 07:00:35]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-19 07:00:36]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-19 07:00:36]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-19 07:00:36]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-19 07:00:36]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-19 07:00:36]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-19 07:00:36]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-19 07:00:36]   [additional_pdf/transport] raw text only
+[2026-05-19 07:00:36]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-19 07:00:37]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-19 07:00:37]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-19 07:00:37]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-19 07:00:37]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-19 07:00:37]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-19 07:00:38]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-19 07:00:38]   [additional_pdf/law] raw text only
+[2026-05-19 07:00:38]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-19 07:00:38]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-19 07:00:38]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-19 07:00:39]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-19 07:00:39]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-19 07:00:39]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-19 07:00:39]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-19 07:00:39]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-19 07:00:39]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-19 07:00:40]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-19 07:00:40]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-19 07:00:40]   [additional_pdf/social] raw text only
+[2026-05-19 07:00:40] additional_pdf: stored 10, failed 0
+[2026-05-19 07:00:40] midterm_pdf: no PDFs
+[2026-05-19 07:00:40] done in 38.86s
+[2026-05-19 12:00:01] fetching homepage
+[2026-05-19 12:00:02] discovered 12 links across 2 sections
+[2026-05-19 12:00:02] teachers_html: 2 unique source(s)
+[2026-05-19 12:00:03]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9_.html] fetching
+[2026-05-19 12:00:04]   fetched 8024832 bytes
+[2026-05-19 12:00:06]   parsed 10223 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-19 12:00:26]   stored 10223 (deduped 0) into lecture
+[2026-05-19 12:00:26]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-19 12:00:26]   fetched 111363 bytes
+[2026-05-19 12:00:26]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-19 12:00:26]   stored 52 (deduped 0) into lecture
+[2026-05-19 12:00:26] teachers totals: 1681 teachers, 4571 subjects, 10275 lectures
+[2026-05-19 12:00:26] additional_pdf: 10 PDF(s) to fetch
+[2026-05-19 12:00:26]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-19 12:00:27]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-19 12:00:27]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-19 12:00:28]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-19 12:00:28]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-19 12:00:28]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-19 12:00:29]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-19 12:00:29]   [additional_pdf/power] raw text only
+[2026-05-19 12:00:29]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-19 12:00:29]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-19 12:00:29]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-19 12:00:29]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-19 12:00:29]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-19 12:00:29]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-19 12:00:29]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-19 12:00:30]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-19 12:00:30]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-19 12:00:30]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-19 12:00:30]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-19 12:00:30]   [additional_pdf/transport] raw text only
+[2026-05-19 12:00:30]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-19 12:00:30]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-19 12:00:30]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-19 12:00:31]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-19 12:00:31]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-19 12:00:31]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-19 12:00:31]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-19 12:00:31]   [additional_pdf/law] raw text only
+[2026-05-19 12:00:31]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-19 12:00:32]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-19 12:00:32]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-19 12:00:33]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-19 12:00:33]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-19 12:00:33]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-19 12:00:33]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-19 12:00:33]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-19 12:00:33]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-19 12:00:34]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-19 12:00:34]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-19 12:00:34]   [additional_pdf/social] raw text only
+[2026-05-19 12:00:34] additional_pdf: stored 10, failed 0
+[2026-05-19 12:00:34] midterm_pdf: no PDFs
+[2026-05-19 12:00:34] done in 32.74s
+[2026-05-19 17:00:01] fetching homepage
+[2026-05-19 17:00:02] discovered 12 links across 2 sections
+[2026-05-19 17:00:02] teachers_html: 2 unique source(s)
+[2026-05-19 17:00:03]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9_.html] fetching
+[2026-05-19 17:00:04]   fetched 8024832 bytes
+[2026-05-19 17:00:06]   parsed 10223 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-19 17:00:26]   stored 10223 (deduped 0) into lecture
+[2026-05-19 17:00:26]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-19 17:00:27]   fetched 111363 bytes
+[2026-05-19 17:00:27]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-19 17:00:27]   stored 52 (deduped 0) into lecture
+[2026-05-19 17:00:27] teachers totals: 1681 teachers, 4571 subjects, 10275 lectures
+[2026-05-19 17:00:27] additional_pdf: 10 PDF(s) to fetch
+[2026-05-19 17:00:27]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-19 17:00:27]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-19 17:00:28]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-19 17:00:28]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-19 17:00:28]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-19 17:00:29]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-19 17:00:29]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-19 17:00:29]   [additional_pdf/power] raw text only
+[2026-05-19 17:00:29]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-19 17:00:29]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-19 17:00:29]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-19 17:00:29]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-19 17:00:29]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-19 17:00:30]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-19 17:00:30]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-19 17:00:30]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-19 17:00:30]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-19 17:00:30]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-19 17:00:30]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-19 17:00:30]   [additional_pdf/transport] raw text only
+[2026-05-19 17:00:30]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-19 17:00:31]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-19 17:00:31]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-19 17:00:31]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-19 17:00:31]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-19 17:00:32]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-19 17:00:32]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-19 17:00:32]   [additional_pdf/law] raw text only
+[2026-05-19 17:00:32]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-19 17:00:32]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-19 17:00:32]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-19 17:00:33]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-19 17:00:33]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-19 17:00:34]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-19 17:00:34]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-19 17:00:34]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-19 17:00:34]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-19 17:00:34]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-19 17:00:34]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-19 17:00:34]   [additional_pdf/social] raw text only
+[2026-05-19 17:00:34] additional_pdf: stored 10, failed 0
+[2026-05-19 17:00:34] midterm_pdf: no PDFs
+[2026-05-19 17:00:34] done in 32.61s
+[2026-05-19 22:00:02] fetching homepage
+[2026-05-19 22:00:02] discovered 12 links across 2 sections
+[2026-05-19 22:00:02] teachers_html: 2 unique source(s)
+[2026-05-19 22:00:03]   [http://leqtori.gtu.ge:9000/public/teachers_2025_2026_2_9_.html] fetching
+[2026-05-19 22:00:05]   fetched 8024832 bytes
+[2026-05-19 22:00:07]   parsed 10223 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-19 22:00:25]   stored 10223 (deduped 0) into lecture
+[2026-05-19 22:00:25]   [http://leqtori.gtu.ge:9000/public/prof_teachers.html] fetching
+[2026-05-19 22:00:25]   fetched 111363 bytes
+[2026-05-19 22:00:25]   parsed 52 lectures from IX კვირის სასწავლო ცხრილი
+[2026-05-19 22:00:25]   stored 52 (deduped 0) into lecture
+[2026-05-19 22:00:25] teachers totals: 1681 teachers, 4571 subjects, 10275 lectures
+[2026-05-19 22:00:25] additional_pdf: 10 PDF(s) to fetch
+[2026-05-19 22:00:25]   [additional_pdf/construction] fetching დამატ. ცხრ. -25-26 2 21.04.26 სამშენებლო.pdf
+[2026-05-19 22:00:26]   [additional_pdf/construction] 307648 bytes, parsing PDF
+[2026-05-19 22:00:26]   [additional_pdf/construction] 14 pages, 52664 text chars
+[2026-05-19 22:00:27]   [additional_pdf/construction] structured: 195 logical rows -> 185 lectures
+[2026-05-19 22:00:27]   [additional_pdf/power] fetching ენერგ ფაკ. დამატებითი_2025_2026_II_07_04_2026).pdf
+[2026-05-19 22:00:28]   [additional_pdf/power] 71228 bytes, parsing PDF
+[2026-05-19 22:00:28]   [additional_pdf/power] 2 pages, 6454 text chars
+[2026-05-19 22:00:28]   [additional_pdf/power] raw text only
+[2026-05-19 22:00:28]   [additional_pdf/mining] fetching სამთო-გეოლოგიური და მთის მდგრადი განვითარების ფაკულტეტი.pdf
+[2026-05-19 22:00:28]   [additional_pdf/mining] 51893 bytes, parsing PDF
+[2026-05-19 22:00:28]   [additional_pdf/mining] 1 pages, 2197 text chars
+[2026-05-19 22:00:28]   [additional_pdf/mining] structured: 9 logical rows -> 8 lectures
+[2026-05-19 22:00:28]   [additional_pdf/agrarian] fetching 2025-2026 II აგრარული დამატებითი_16_04_2026.pdf
+[2026-05-19 22:00:29]   [additional_pdf/agrarian] 130098 bytes, parsing PDF
+[2026-05-19 22:00:29]   [additional_pdf/agrarian] 4 pages, 11664 text chars
+[2026-05-19 22:00:29]   [additional_pdf/agrarian] structured: 64 logical rows -> 64 lectures
+[2026-05-19 22:00:29]   [additional_pdf/transport] fetching 05 დამატებითი ცხრილი . 23.04.2026.pdf
+[2026-05-19 22:00:29]   [additional_pdf/transport] 164850 bytes, parsing PDF
+[2026-05-19 22:00:30]   [additional_pdf/transport] 7 pages, 16906 text chars
+[2026-05-19 22:00:30]   [additional_pdf/transport] raw text only
+[2026-05-19 22:00:30]   [additional_pdf/architecture] fetching ცხრილი დამატ. არქიტექტურის, ურბანისტიკისა და დიზაინის.pdf
+[2026-05-19 22:00:30]   [additional_pdf/architecture] 90193 bytes, parsing PDF
+[2026-05-19 22:00:30]   [additional_pdf/architecture] 2 pages, 5806 text chars
+[2026-05-19 22:00:30]   [additional_pdf/architecture] structured: 18 logical rows -> 15 lectures
+[2026-05-19 22:00:30]   [additional_pdf/law] fetching სამართლისა და საერტაშორისო ურთ.დამატებითი ცხრილი_17_04_2026.pdf
+[2026-05-19 22:00:31]   [additional_pdf/law] 284550 bytes, parsing PDF
+[2026-05-19 22:00:31]   [additional_pdf/law] 9 pages, 16229 text chars
+[2026-05-19 22:00:31]   [additional_pdf/law] raw text only
+[2026-05-19 22:00:31]   [additional_pdf/ims] fetching იმს დამატებითი სასწავლო კურსების ცხრილი 2025-2026 II სემესტრი 9_05_2026.pdf
+[2026-05-19 22:00:31]   [additional_pdf/ims] 205716 bytes, parsing PDF
+[2026-05-19 22:00:32]   [additional_pdf/ims] 10 pages, 29623 text chars
+[2026-05-19 22:00:32]   [additional_pdf/ims] structured: 141 logical rows -> 132 lectures
+[2026-05-19 22:00:32]   [additional_pdf/business] fetching ბიზნესტექნოლოგიები_დამატებითი_17_04_2026.pdf
+[2026-05-19 22:00:33]   [additional_pdf/business] 114955 bytes, parsing PDF
+[2026-05-19 22:00:33]   [additional_pdf/business] 4 pages, 12300 text chars
+[2026-05-19 22:00:33]   [additional_pdf/business] structured: 37 logical rows -> 19 lectures
+[2026-05-19 22:00:33]   [additional_pdf/social] fetching დამატებიი ცხრილი სოციალურ მეცნიერებათა ფაკულტეტი 15_05_2026.pdf
+[2026-05-19 22:00:33]   [additional_pdf/social] 86807 bytes, parsing PDF
+[2026-05-19 22:00:33]   [additional_pdf/social] 1 pages, 2911 text chars
+[2026-05-19 22:00:33]   [additional_pdf/social] raw text only
+[2026-05-19 22:00:33] additional_pdf: stored 10, failed 0
+[2026-05-19 22:00:33] midterm_pdf: no PDFs
+[2026-05-19 22:00:33] done in 31.52s

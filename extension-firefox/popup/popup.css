@@ -1,12 +1,12 @@
 * { box-sizing: border-box; }
 html, body {
     margin: 0; padding: 0;
-    /* Desktop popup uses 360 px exactly. Firefox Android opens the popup
-       full-screen — `max-width: 100vw` ensures we never overflow the phone
-       viewport (narrow phones stay readable; wider phones get a 360 px
-       column, which is the popup's design width anyway). */
+    /* A browser-action popup has no viewport until it is sized, so `vw`
+       units (e.g. max-width:100vw) resolve to ~0 on Firefox desktop and
+       collapse the popup to zero width. The width MUST be a fixed pixel
+       value. 360px is fine on Android too (readable, just not full-bleed). */
     width: 360px;
-    max-width: 100vw;
+    min-width: 360px;
     background: #0f1115;
     color: #e7e9ee;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;

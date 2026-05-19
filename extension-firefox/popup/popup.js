@@ -13,6 +13,35 @@ const hide = (id) => $(id).classList.add('hidden');
 let _card = null;       // storage.local["lastCard"]
 let _matches = null;    // response from /api/me.php
 
+/**
+ * Open a URL in a real browser tab. On Firefox Android the popup is itself a
+ * page, so a plain <a target="_blank"> would navigate INSIDE the popup webview
+ * instead of opening a separate tab. tabs.create() forces a real tab and needs
+ * no extra permission. Falls back to window.open() if the API is missing.
+ */
+function openInTab(url) {
+    if (!url) return;
+    try {
+        if (ext && ext.tabs && ext.tabs.create) {
+            ext.tabs.create({ url, active: true });
+            if (typeof window !== 'undefined' && window.close) window.close();
+            return;
+        }
+    } catch {}
+    window.open(url, '_blank', 'noopener');
+}
+
+// Delegate every in-popup link click to openInTab() so links always land in a
+// separate browser tab (the Android-popup bug above), not the popup itself.
+document.addEventListener('click', (e) => {
+    const a = e.target && e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    const href = a.getAttribute('href');
+    if (!href || href === '#' || href.startsWith('javascript:')) return;
+    e.preventDefault();
+    openInTab(a.href);
+});
+
 document.addEventListener('DOMContentLoaded', async () => {
     await popupLang();
     document.documentElement.lang = _LANG;

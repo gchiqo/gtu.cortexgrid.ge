@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "GTU ცხრილი — Personal Schedule",
   "short_name": "GTU ცხრილი",
-  "version": "0.3.3",
+  "version": "0.3.5",
   "description": "Personal weekly class schedule for GTU students. Combines your vici.gtu.ge courses with the public leqtori schedule.",
   "browser_specific_settings": {
     "gecko": {
