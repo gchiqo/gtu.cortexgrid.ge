@@ -139,13 +139,9 @@ function build_personal_week_grid(array $allLectures): array {
         if ($l['kind'] === 'regular') {
             $start = max(0, (int)$l['start_slot'] - 1);
             $end   = min(11, (int)($l['end_slot'] ?? $l['start_slot']) - 1);
-            $key = ($l['course_name'] ?? '') . '|' . ($l['start_time'] ?? '') . '|' . ($l['teacher'] ?? '');
-            if (in_array($key, $seen[$start][$col], true)) continue;
-            $seen[$start][$col][] = $key;
-
-            $grid[$start][$col][] = [
+            $entry = [
                 'kind'        => 'regular',
-                'span'        => max(1, $end - $start + 1),
+                'span'        => max(1, $end - $start + 1),  // for time-range display only
                 'subject'     => $l['course_name'],
                 'teacher'     => $l['teacher'] ?? '',
                 'room'        => $l['room'] ?? '',
@@ -154,7 +150,17 @@ function build_personal_week_grid(array $allLectures): array {
                 'end_time'    => $l['end_time'] ?? '',
                 'course_idx'  => $l['course_idx'] ?? null,
             ];
-            for ($s = $start + 1; $s <= $end; $s++) $skip[$s][$col] = true;
+            $key = ($l['course_name'] ?? '') . '|' . ($l['start_time'] ?? '') . '|' . ($l['teacher'] ?? '');
+            // Fan multi-hour lectures out into EVERY slot they cover. We used
+            // to write once and mark subsequent slots as "skip" (via td
+            // rowspan), but that hid any shorter lecture that landed inside
+            // the rowspanned area — e.g. General Chem A 13:00 was invisible
+            // because Hadoop 12:00–14:00's rowspan covered slot 13:00.
+            for ($s = $start; $s <= $end; $s++) {
+                if (in_array($key, $seen[$s][$col], true)) continue;
+                $seen[$s][$col][] = $key;
+                $grid[$s][$col][] = $entry;
+            }
         } else { // additional: each entry in `times[]` is a single hour slot
             foreach (($l['times'] ?? []) as $tm) {
                 if (!preg_match('/^(\d{1,2}):(\d{2})$/', $tm, $m)) continue;
@@ -421,6 +427,7 @@ $canonicalUrl = 'https://gtu.cortexgrid.ge' . ($_SERVER['REQUEST_URI'] ?? '/me.p
     <section class="week-grid">
         <h2 data-i18n="me.weekgrid.heading">🗓️ კვირის ცხრილი</h2>
         <p class="muted small" data-i18n="me.weekgrid.help">ჩემი ყველა საგნის ლექცია კვირის ცხრილზე.</p>
+        <div class="table-scroll">
         <table class="schedule-table">
             <thead><tr>
                 <th></th>
@@ -433,10 +440,17 @@ $canonicalUrl = 'https://gtu.cortexgrid.ge' . ($_SERVER['REQUEST_URI'] ?? '/me.p
                 <tr>
                     <th class="slot-label"><?= ($s + 1) ?>—<?= sprintf('%02d', $s + 9) ?>:00</th>
                     <?php for ($d = 0; $d < 6; $d++):
-                        if ($weeklySkip[$s][$d]) continue;
-                        $cell = $weeklyGrid[$s][$d]; ?>
-                        <td<?= ($cell && $cell[0]['span'] > 1) ? ' rowspan="' . $cell[0]['span'] . '"' : '' ?>
-                            class="<?= $cell ? 'lesson' . ($cell[0]['kind'] === 'additional' ? ' lesson-add' : '') : 'free' ?>">
+                        $cell = $weeklyGrid[$s][$d];
+                        $isConflict = is_array($cell) && count($cell) > 1;
+                        $cls = !$cell
+                            ? 'free'
+                            : 'lesson' . ($cell[0]['kind'] === 'additional' ? ' lesson-add' : '')
+                                . ($isConflict ? ' cell-conflict' : '');
+                    ?>
+                        <td class="<?= $cls ?>">
+                            <?php if ($isConflict): ?>
+                                <div class="conflict-badge" title="ერთდროულად რამდენიმე ლექცია / multiple lectures overlap">⚠</div>
+                            <?php endif; ?>
                             <?php foreach ($cell as $lesson): ?>
                                 <div class="grid-lesson" data-teacher="<?= h($lesson['teacher']) ?>">
                                     <a class="subject" href="#course-<?= (int)$lesson['course_idx'] ?>">
@@ -460,6 +474,7 @@ $canonicalUrl = 'https://gtu.cortexgrid.ge' . ($_SERVER['REQUEST_URI'] ?? '/me.p
             <?php endfor; ?>
             </tbody>
         </table>
+        </div>
     </section>
 <?php endif; ?>
 
